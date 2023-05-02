@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { Shell } from './shell/shell.service';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { HomeComponent } from './home/home.component';
+import { NewsComponent } from './news/news.component';
+import { UsersComponent } from './users/users.component';
 
 const routes: Routes = [
-  Shell.childRoutes([
-    {
-      path: 'news',
-      loadChildren: () =>
-        import('./news-list/news-list.module').then(m => m.NewsListModule),
-    },
-  ]),
-
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  {
+    path: 'home',
+    component: HomeComponent,
+    children: [
+      { path: 'news', component: NewsComponent },
+      { path: 'users', component: UsersComponent },
+    ],
+  },
+  // { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
