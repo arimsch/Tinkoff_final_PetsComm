@@ -1,0 +1,27 @@
+<article class="news">
+  <app-user-line [userName]="currentNews.author"></app-user-line>
+  <div class="news__content">
+    {{ currentNews.content }}
+  </div>
+  <div class="news__img"><img src="{{ currentNews.urlNewsPhoto }}" /></div>
+  <div class="news__footer">
+    <div class="line">
+      <button class="like">
+        <tui-svg src="tuiIconHeartLarge" class="icon"></tui-svg>
+      </button>
+      <div class="line__content">
+        {{ likesCount }}
+      </div>
+    </div>
+    <div>{{ currentNews.timestamp | date : 'dd.MM.yyyy &nbsp; HH:mm' }}</div>
+  </div>
+  <tui-accordion-item class="container">
+    <div class="line">
+      <tui-svg src="tuiIconMessageSquareLarge" class="icon"></tui-svg>
+      <h3 class="line__content">Комментарии</h3>
+    </div>
+    <ng-template tuiAccordionItemContent>
+      <app-comment-list [newsId]="currentNews.$id"></app-comment-list>
+    </ng-template>
+  </tui-accordion-item>
+</article>

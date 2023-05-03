@@ -1,0 +1,17 @@
+<form [formGroup]="formComment" (submit)="sendComment(formComment)">
+  <tui-text-area
+    formControlName="content"
+    class="tui-space_bottom-4 field-small">
+    Комментарий
+  </tui-text-area>
+  <app-button [align]="'right'" [text]="'Добавить'"></app-button>
+  <!-- <div class="right-align">
+    <button
+      [disabled]="formComment.invalid"
+      tuiButton
+      appearance="primary"
+      size="s">
+      Добавить
+    </button>
+  </div> -->
+</form>

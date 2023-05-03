@@ -1,0 +1,26 @@
+<article class="form-auth">
+  <div class="form-auth__title">
+    <h1>PetsComm</h1>
+  </div>
+  <div class="form-auth__body">
+    <form [formGroup]="signInForm" (submit)="signIn()">
+      <div class="tui-form__row">
+        <tui-input tuiTextfieldSize="s" formControlName="email">
+          Электронная почта
+        </tui-input>
+        <app-validators [field]="_emailField"></app-validators>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-input tuiTextfieldSize="s" formControlName="password">
+          Пароль
+        </tui-input>
+        <app-validators [field]="_passwordField"></app-validators>
+      </div>
+      <app-button [align]="'right'" [text]="'Войти'"></app-button>
+      <div class="right-align">
+        <a class="router-link" routerLink="/registration">Создать аккаунт</a>
+      </div>
+    </form>
+  </div>
+</article>
