@@ -31,11 +31,11 @@ export class AddCommentComponent {
   }
 
   public sendComment(formComment: FormGroup<any>): void {
-    this.addComment.emit({
-      author: 'I will get it from authorizedUser.service',
-      content: formComment.value,
-      timestamp: new Date().getMilliseconds(),
-    }),
-      this.formComment.reset();
+    // this.addComment.emit({
+    //   author: 'I will get it from authorizedUser.service',
+    //   content: formComment.value,
+    //   timestamp: new Date().getMilliseconds(),
+    // }),
+    //   this.formComment.reset();
   }
 }

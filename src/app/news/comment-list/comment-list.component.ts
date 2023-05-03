@@ -10,11 +10,11 @@ export class CommentListComponent implements OnInit {
   public newsId!: string;
 
   public comments: Comment[] = [
-    {
-      author: 'Arina',
-      content: 'I agree',
-      timestamp: 1575909015000,
-    },
+    // {
+    //   author: 'Arina',
+    //   content: 'I agree',
+    //   timestamp: 1575909015000,
+    // },
   ];
 
   ngOnInit(): void {

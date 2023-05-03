@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-registration',
   templateUrl: './registration.component.html',
-  // styleUrls: ['./login.component.less']
+  // styleUrls: ['./registration.component.less']
 })
 export class RegistrationComponent {}

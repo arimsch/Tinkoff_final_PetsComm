@@ -3,10 +3,10 @@
   <div class="news__content">
     {{ currentNews.content }}
   </div>
-  <div class="news__img"><img src="{{ currentNews.img }}" /></div>
+  <div class="news__img"><img src="{{ currentNews.urlNewsPhoto }}" /></div>
   <div class="news__footer">
     <div class="line">
-      <button class="link">
+      <button class="like">
         <tui-svg src="tuiIconHeartLarge" class="icon"></tui-svg>
       </button>
       <div class="line__content">
@@ -21,7 +21,7 @@
       <h3 class="line__content">Комментарии</h3>
     </div>
     <ng-template tuiAccordionItemContent>
-      <app-comment-list [newsId]="currentNews.id"></app-comment-list>
+      <app-comment-list [newsId]="currentNews.$id"></app-comment-list>
     </ng-template>
   </tui-accordion-item>
 </article>
