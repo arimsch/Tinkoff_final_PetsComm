@@ -1,26 +1,62 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private readonly angularfireAuth: AngularFireAuth,) {}
+  readonly currentUser$ = new BehaviorSubject<User | null>(null);
 
-  public async signIn(email: string, password: string) {
+  readonly loginErrMessage$ = new Subject<string>();
+
+  constructor(
+    private readonly angularfireAuth: AngularFireAuth,
+    private readonly router: Router
+  ) {
+    this.initLocalStorage();
+  }
+
+  public async login(email: string, password: string) {
     return this.angularfireAuth
       .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        this.angularfireAuth.authState.subscribe((user) => {
+      .then(() => {
+        this.angularfireAuth.authState.subscribe(user => {
           if (user) {
+            const currentUser: User = {
+              uid: user.uid,
+              email: email,
+            };
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            this.currentUser$.next(currentUser);
+            this.router.navigate(['/']);
           }
         });
       })
-      .catch((error) => {
-        // const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorMessage);
+      .catch(error => {
+        switch (error.code) {
+          case 'auth/wrong-password': {
+            this.loginErrMessage$.next('Неверный пароль');
+            break;
+          }
+          default:
+            this.loginErrMessage$.next('Неверный email');
+        }
       });
+  }
+
+  private initLocalStorage(): void {
+    let localStorageUser = JSON.parse(
+      JSON.stringify(localStorage.getItem('currentUser'))
+    );
+    if (localStorageUser) {
+      const currentUser: User = {
+        uid: localStorageUser.uid,
+        email: localStorageUser.email
+      };
+      this.currentUser$.next(currentUser);
+    }
   }
 }

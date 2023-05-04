@@ -1,4 +1,4 @@
-import { TuiAlertModule } from '@taiga-ui/core';
+import { TuiAlertModule, TuiRootModule } from '@taiga-ui/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -17,6 +17,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthService } from 'src/shared/services/auth.service';
 import { LoginModule } from './login/login.module';
 import { RegistrationModule } from './registration/registration.module';
+import { RegistrationService } from 'src/shared/services/registration.service';
+import { PageNotFoundModule } from './page-not-found/page-not-found.module';
+import { UserService } from 'src/shared/services/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,11 +36,12 @@ import { RegistrationModule } from './registration/registration.module';
     UsersModule,
     LoginModule,
     RegistrationModule,
-    // TuiRootModule,
+    PageNotFoundModule,
+    TuiRootModule,
     // TuiDialogModule,
     TuiAlertModule,
   ],
-  providers: [AuthService],
+  providers: [RegistrationService, AuthService, UserService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

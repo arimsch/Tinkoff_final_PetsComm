@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-user-line',
   templateUrl: './user-line.component.html',
+  styleUrls: ['./../../../assets/styles/common-styles.less'],
 })
 export class UserLineComponent {
   @Input()

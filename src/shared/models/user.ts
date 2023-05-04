@@ -1,11 +1,7 @@
 export interface User {
-  $email: string;
-  userName: string;
-  password: string;
-  birthday: Date;
-  city: string;
-  sudscribe: object;
-  urlUserPhoto?: string;
+  uid: string;
+  email: string;
+  displayName?: string;
+  photoURL?: string;
+  subscribe?: object;
 }
-// firebase.firestore.Timestamp.fromDate(date)
-// firebaseDate.toDate()

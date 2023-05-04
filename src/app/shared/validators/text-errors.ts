@@ -10,4 +10,5 @@ export enum TextErrors {
   PASSWORD_NO_SLETTER = 'поле должно содержать строчную букву',
   FALSE_MAIL = 'введите корректный email',
   SPECIAL_SYM = 'пароль должен содеражть хоть 1 спец. символ - _!#+-$',
+  NO_MATCH = 'пароли не совпадают',
 }

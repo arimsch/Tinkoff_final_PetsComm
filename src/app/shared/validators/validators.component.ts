@@ -22,20 +22,13 @@ import { TextErrors } from './text-errors';
   templateUrl: './validators.component.html',
 })
 export class ValidatorsComponent {
-  @Input() field: AbstractControl | null = null;
+  @Input() public field: AbstractControl | null = null;
 
   public printError(): TuiValidationError | null {
     if (this.field?.errors && (this.field.dirty || this.field.touched)) {
       return this.makeMessageError(this.field.errors);
     }
     return null;
-  }
-
-  private passwordsMatch(control: AbstractControl): ValidationErrors | null {
-    return control.get('password')?.value ===
-      control.get('confirmPassword')?.value
-      ? null
-      : { nomatch: true };
   }
 
   private makeMessageError(
@@ -70,6 +63,9 @@ export class ValidatorsComponent {
         return new TuiValidationError(
           TextErrors.MIN_LENGTH + errorObj['minlength'].requiredLength
         );
+      }
+      case 'nomatch': {
+        return new TuiValidationError(TextErrors.NO_MATCH);
       }
     }
     return null;

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { align } from 'src/shared/types/align';
+import { align } from './align';
 
 @Component({
   selector: 'app-button',

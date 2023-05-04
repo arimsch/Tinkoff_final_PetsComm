@@ -1,6 +1,8 @@
 export enum ValidatorsLength {
   MAX_LENGTH_MAIL = 100,
-  MIN_LENGTH_PASSW = 5,
+  MIN_LENGTH_PASSW = 6,
+  MAX_LENGTH_DISPLAY_NAME = 25,
+  MIN_LENGTH_DISPLAY_NAME = 3,
 }
 
 export const HAVE_NUMBER_PATTERN = /\d/;
