@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { User } from '../models/user';
 import { Router } from '@angular/router';
 
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  readonly currentUser$ = new BehaviorSubject<User | null>(null);
+  private readonly currentUser$ = new BehaviorSubject<User | null>(null);
 
   readonly loginErrMessage$ = new Subject<string>();
 
@@ -19,7 +19,11 @@ export class AuthService {
     this.initLocalStorage();
   }
 
-  public async login(email: string, password: string) {
+  public get _currentUser$(): BehaviorSubject<User | null> {
+    return this.currentUser$;
+  }
+
+  public async login(email: string, password: string): Promise<void> {
     return this.angularfireAuth
       .signInWithEmailAndPassword(email, password)
       .then(() => {
@@ -48,15 +52,9 @@ export class AuthService {
   }
 
   private initLocalStorage(): void {
-    let localStorageUser = JSON.parse(
-      JSON.stringify(localStorage.getItem('currentUser'))
-    );
-    if (localStorageUser) {
-      const currentUser: User = {
-        uid: localStorageUser.uid,
-        email: localStorageUser.email
-      };
-      this.currentUser$.next(currentUser);
+    const userInLocalSt = localStorage.getItem('currentUser');
+    if (userInLocalSt) {
+      this.currentUser$.next(JSON.parse(userInLocalSt));
     }
   }
 }

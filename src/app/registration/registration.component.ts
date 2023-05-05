@@ -62,11 +62,14 @@ export class RegistrationComponent {
   private buildSignUpForm(): void {
     this.signUpForm = this.fb.group(
       {
-        displayName:[null, [
-          Validators.required,
-          Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
-          Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME)
-        ],],
+        displayName: [
+          null,
+          [
+            Validators.required,
+            Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
+            Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME),
+          ],
+        ],
         email: [
           null,
           [

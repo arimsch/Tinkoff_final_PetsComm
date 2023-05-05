@@ -15,18 +15,22 @@ export class RegistrationService {
     private readonly userService: UserService
   ) {}
 
-  public async signUp(email: string, password: string, displayName: string) {
+  public async signUp(
+    email: string,
+    password: string,
+    displayName: string
+  ): Promise<void> {
     return this.angularfireAuth
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
-        if(userCredential.user) {
-        this.userService.AddUsers({
-          uid: userCredential.user.uid,
-          email: email,
-          displayName: displayName
-        });
-        this.router.navigate(['login']);
-      }
+        if (userCredential.user) {
+          this.userService.addUsers({
+            uid: userCredential.user.uid,
+            email: email,
+            displayName: displayName,
+          });
+          this.router.navigate(['login']);
+        }
       })
       .catch(error => {
         switch (error.code) {

@@ -19,7 +19,10 @@ export class AuthGuard {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.currentUser$.value) {
+    if (
+      this.authService._currentUser$ &&
+      this.authService._currentUser$.value
+    ) {
       return true;
     }
     this.router.navigate(['/login']);

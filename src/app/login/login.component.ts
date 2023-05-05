@@ -6,7 +6,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { TuiAlertService } from '@taiga-ui/core';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/shared/services/auth.service';
 
 @Component({
@@ -35,10 +34,6 @@ export class LoginComponent {
 
   public get _passwordField(): AbstractControl | null {
     return this.signInForm.get('password');
-  }
-
-  public get error$(): Observable<string> {
-    return this.authService.loginErrMessage$;
   }
 
   public signIn(formValue: FormGroup): void {
