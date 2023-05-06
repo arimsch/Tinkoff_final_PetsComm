@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -20,6 +20,7 @@ import { TextErrors } from './text-errors';
 @Component({
   selector: 'app-validators',
   templateUrl: './validators.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ValidatorsComponent {
   @Input() public field: AbstractControl | null = null;

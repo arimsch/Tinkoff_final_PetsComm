@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly currentUser$ = new BehaviorSubject<User | null>(null);
-
   readonly loginErrMessage$ = new Subject<string>();
+
+  private readonly currentUser$ = new BehaviorSubject<User | null>(null);
 
   constructor(
     private readonly angularfireAuth: AngularFireAuth,
