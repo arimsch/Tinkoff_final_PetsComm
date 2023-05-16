@@ -1,0 +1,7 @@
+<div *ngIf="users$ | async as users">
+  <app-user-sub-card
+    *ngFor="let user of users"
+    [user]="user"
+    (subscribe)="subscribeUser($event)"
+    (unSubscribe)="unsubscribeUser($event)"></app-user-sub-card>
+</div>

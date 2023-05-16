@@ -3,25 +3,27 @@
     <h1>PetsComm</h1>
   </div>
   <div class="form-auth__body">
-    <form [formGroup]="signUpForm" (submit)="signUp(signUpForm)">
+    <form
+      [formGroup]="registrationForm"
+      (submit)="registration(registrationForm)">
       <div class="tui-form__row">
         <tui-input tuiTextfieldSize="s" formControlName="displayName">
           Имя пользователя
         </tui-input>
-        <app-validators [field]="_displayName"></app-validators>
+        <app-validators [field]="displayName"></app-validators>
       </div>
       <div class="tui-form__row">
         <tui-input tuiTextfieldSize="s" formControlName="email">
           Электронная почта
         </tui-input>
-        <app-validators [field]="_emailField"></app-validators>
+        <app-validators [field]="emailField"></app-validators>
       </div>
 
       <div class="tui-form__row">
         <tui-input-password tuiTextfieldSize="s" formControlName="password">
           Пароль
         </tui-input-password>
-        <app-validators [field]="_passwordField"></app-validators>
+        <app-validators [field]="passwordField"></app-validators>
       </div>
       <div class="tui-form__row">
         <tui-input-password
@@ -29,12 +31,12 @@
           formControlName="confirmPassword">
           Подтвердите пароль
         </tui-input-password>
-        <app-validators [field]="signUpForm"></app-validators>
+        <app-validators [field]="registrationForm"></app-validators>
       </div>
       <app-button
         [align]="'right'"
         [text]="'Регистрация'"
-        [disable]="signUpForm.invalid"></app-button>
+        [disable]="registrationForm.invalid"></app-button>
       <div class="right-align">
         <a class="router-link" routerLink="/login">Войти</a>
       </div>

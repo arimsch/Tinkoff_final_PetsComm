@@ -1,0 +1,15 @@
+<div class="sub-card">
+  <app-user-line
+    [userName]="user.displayName"
+    [userPhotoURL]="userPhoto"></app-user-line>
+  <app-button
+    *ngIf="!(subscribeStatus$ | async)"
+    [align]="'left'"
+    [text]="'Подписаться'"
+    (click)="subscribeUser()"></app-button>
+  <app-button
+    *ngIf="subscribeStatus$ | async"
+    [align]="'left'"
+    [text]="'Отписаться'"
+    (click)="unSubscribeUser()"></app-button>
+</div>

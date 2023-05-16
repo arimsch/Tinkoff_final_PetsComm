@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
 import { TuiAvatarModule } from '@taiga-ui/kit';
-import { TuiRootModule } from '@taiga-ui/core';
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent],
+  declarations: [HomeComponent],
   exports: [],
-  imports: [CommonModule, RouterModule, TuiAvatarModule, TuiRootModule],
+  imports: [CommonModule, RouterModule, TuiAvatarModule],
 })
 export class HomeModule {}

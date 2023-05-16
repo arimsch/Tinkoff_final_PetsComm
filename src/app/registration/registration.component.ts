@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { RegistrationService } from 'src/shared/services/registration.service';
+import { RegistrationService } from 'src/app/registration/registration.service';
 import {
   HAVE_BIGLETTER_PATTERN,
   HAVE_NUMBER_PATTERN,
@@ -15,52 +15,57 @@ import {
 } from '../shared/validators/registration-validators-params';
 import { passwordsMatch } from './password-match';
 import { TuiAlertService } from '@taiga-ui/core';
+import { DestroyService } from '../core/destroy.service';
+import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./../../assets/styles/common-styles.less'],
+  styleUrls: ['./registration.component.less'],
+  providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RegistrationComponent {
-  public signUpForm!: FormGroup;
+  public registrationForm!: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly registrationService: RegistrationService,
-    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService,
+    @Inject(DestroyService) private readonly destroy$: Observable<void>
   ) {}
 
   ngOnInit(): void {
-    this.buildSignUpForm();
-    this.initAlertError();
+    this.buildRegistrationForm();
+    this.registrationService.registrationErrMessage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(err => this.createAlertError(err));
   }
 
-  public get _displayName(): AbstractControl | null {
-    return this.signUpForm.get('displayName');
+  public get displayName(): AbstractControl | null {
+    return this.registrationForm.get('displayName');
   }
 
-  public get _emailField(): AbstractControl | null {
-    return this.signUpForm.get('email');
+  public get emailField(): AbstractControl | null {
+    return this.registrationForm.get('email');
   }
 
-  public get _passwordField(): AbstractControl | null {
-    return this.signUpForm.get('password');
+  public get passwordField(): AbstractControl | null {
+    return this.registrationForm.get('password');
   }
 
-  public signUp(formValue: FormGroup): void {
+  public registration(formValue: FormGroup): void {
     let { email, password, displayName } = formValue.value;
-    this.registrationService.signUp(email, password, displayName);
+    this.registrationService.registration(email, password, displayName);
   }
 
-  private initAlertError(): void {
-    this.registrationService.signUpErrMessage$.subscribe(val => {
-      this.alerts.open(`${val}`, { label: 'Ошибка' }).subscribe();
-    });
+  private createAlertError(err: string): void {
+    this.alerts.open(err, { label: 'Ошибка' }).subscribe();
   }
 
-  private buildSignUpForm(): void {
-    this.signUpForm = this.fb.group(
+  private buildRegistrationForm(): void {
+    this.registrationForm = this.fb.group(
       {
         displayName: [
           null,

@@ -10,7 +10,8 @@ import {
 } from '@taiga-ui/kit';
 import { TuiErrorModule } from '@taiga-ui/core';
 import { SharedModule } from '../shared/shared.module';
-import { RouterModule } from '@angular/router';
+import { RegistrationService } from 'src/app/registration/registration.service';
+import { RegistrationRoutingModule } from './registration-routing.module';
 
 @NgModule({
   providers: [
@@ -24,6 +25,7 @@ import { RouterModule } from '@angular/router';
         },
       },
     },
+    RegistrationService,
   ],
   declarations: [RegistrationComponent],
   exports: [RegistrationComponent],
@@ -35,7 +37,7 @@ import { RouterModule } from '@angular/router';
     TuiInputModule,
     TuiErrorModule,
     SharedModule,
-    RouterModule,
+    RegistrationRoutingModule,
   ],
 })
 export class RegistrationModule {}
