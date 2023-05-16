@@ -4,10 +4,11 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home.component';
 import { TuiAvatarModule } from '@taiga-ui/kit';
+import { TuiRootModule } from '@taiga-ui/core';
 
 @NgModule({
   declarations: [HeaderComponent, HomeComponent],
   exports: [],
-  imports: [CommonModule, RouterModule, TuiAvatarModule],
+  imports: [CommonModule, RouterModule, TuiAvatarModule, TuiRootModule],
 })
 export class HomeModule {}

@@ -1,1 +1,43 @@
-<p>registration works!</p>
+<article class="form-auth">
+  <div class="form-auth__title">
+    <h1>PetsComm</h1>
+  </div>
+  <div class="form-auth__body">
+    <form [formGroup]="signUpForm" (submit)="signUp(signUpForm)">
+      <div class="tui-form__row">
+        <tui-input tuiTextfieldSize="s" formControlName="displayName">
+          Имя пользователя
+        </tui-input>
+        <app-validators [field]="_displayName"></app-validators>
+      </div>
+      <div class="tui-form__row">
+        <tui-input tuiTextfieldSize="s" formControlName="email">
+          Электронная почта
+        </tui-input>
+        <app-validators [field]="_emailField"></app-validators>
+      </div>
+
+      <div class="tui-form__row">
+        <tui-input-password tuiTextfieldSize="s" formControlName="password">
+          Пароль
+        </tui-input-password>
+        <app-validators [field]="_passwordField"></app-validators>
+      </div>
+      <div class="tui-form__row">
+        <tui-input-password
+          tuiTextfieldSize="s"
+          formControlName="confirmPassword">
+          Подтвердите пароль
+        </tui-input-password>
+        <app-validators [field]="signUpForm"></app-validators>
+      </div>
+      <app-button
+        [align]="'right'"
+        [text]="'Регистрация'"
+        [disable]="signUpForm.invalid"></app-button>
+      <div class="right-align">
+        <a class="router-link" routerLink="/login">Войти</a>
+      </div>
+    </form>
+  </div>
+</article>

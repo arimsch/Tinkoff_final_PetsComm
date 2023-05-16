@@ -1,24 +1,31 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'src/shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./../../assets/styles/common-styles.less'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
   public signInForm!: FormGroup;
 
-  constructor(private readonly fb: FormBuilder, private readonly auth: AuthService) {}
+  constructor(
+    private readonly fb: FormBuilder,
+    private readonly authService: AuthService,
+    @Inject(TuiAlertService) private readonly alerts: TuiAlertService
+  ) {}
 
   ngOnInit(): void {
     this.buildSignInForm();
+    this.initAlertError();
   }
 
   public get _emailField(): AbstractControl | null {
@@ -29,8 +36,15 @@ export class LoginComponent {
     return this.signInForm.get('password');
   }
 
-  public signIn(): void {
-    this.auth.signIn('a@a', '12345');
+  public signIn(formValue: FormGroup): void {
+    let { email, password } = formValue.value;
+    this.authService.login(email, password);
+  }
+
+  private initAlertError(): void {
+    this.authService.loginErrMessage$.subscribe(val => {
+      this.alerts.open(`${val}`, { label: 'Ошибка' }).subscribe();
+    });
   }
 
   private buildSignInForm(): void {

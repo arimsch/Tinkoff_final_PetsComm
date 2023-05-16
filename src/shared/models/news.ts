@@ -6,3 +6,6 @@ export interface News {
   timestamp: number;
   urlNewsPhoto?: string;
 }
+
+// firebase.firestore.Timestamp.fromDate(date)
+// firebaseDate.toDate()
