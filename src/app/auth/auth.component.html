@@ -3,24 +3,24 @@
     <h1>PetsComm</h1>
   </div>
   <div class="form-auth__body">
-    <form [formGroup]="signInForm" (submit)="signIn(signInForm)">
+    <form [formGroup]="authForm" (submit)="auth(authForm)">
       <div class="tui-form__row">
         <tui-input tuiTextfieldSize="s" formControlName="email">
           Электронная почта
         </tui-input>
-        <app-validators [field]="_emailField"></app-validators>
+        <app-validators [field]="emailField"></app-validators>
       </div>
 
       <div class="tui-form__row">
         <tui-input-password tuiTextfieldSize="s" formControlName="password">
           Пароль
         </tui-input-password>
-        <app-validators [field]="_passwordField"></app-validators>
+        <app-validators [field]="passwordField"></app-validators>
       </div>
       <app-button
         [align]="'right'"
         [text]="'Войти'"
-        [disable]="signInForm.invalid"></app-button>
+        [disable]="authForm.invalid"></app-button>
       <div class="right-align">
         <a class="router-link" routerLink="/registration">Создать аккаунт</a>
       </div>

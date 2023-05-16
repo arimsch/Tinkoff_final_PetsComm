@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { UserService } from './user.service';
+import { UserService } from '../core/user.service';
 import { Subject } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class RegistrationService {
-  readonly signUpErrMessage$ = new Subject<string>();
+  private readonly _registrationErrMessage$ = new Subject<string>();
   constructor(
     private readonly angularfireAuth: AngularFireAuth,
     private readonly router: Router,
     private readonly userService: UserService
   ) {}
 
-  public async signUp(
+  public get registrationErrMessage$(): Subject<string> {
+    return this._registrationErrMessage$;
+  }
+  public async registration(
     email: string,
     password: string,
     displayName: string
@@ -24,7 +25,7 @@ export class RegistrationService {
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
         if (userCredential.user) {
-          this.userService.addUsers({
+          this.userService.addUserWithUid({
             uid: userCredential.user.uid,
             email: email,
             displayName: displayName,
@@ -35,11 +36,11 @@ export class RegistrationService {
       .catch(error => {
         switch (error.code) {
           case 'auth/email-already-in-use': {
-            this.signUpErrMessage$.next('email уже используется');
+            this._registrationErrMessage$.next('email уже используется');
             break;
           }
           default:
-            this.signUpErrMessage$.next('Регистрация невозможна');
+            this._registrationErrMessage$.next('Регистрация невозможна');
         }
         console.error(error.message);
       });

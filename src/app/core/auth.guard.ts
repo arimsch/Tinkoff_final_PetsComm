@@ -5,11 +5,9 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../auth/auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class AuthGuard {
   constructor(
     private readonly authService: AuthService,
@@ -19,10 +17,7 @@ export class AuthGuard {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (
-      this.authService._currentUser$ &&
-      this.authService._currentUser$.value
-    ) {
+    if (this.authService.currentUser$ && this.authService.currentUser$.value) {
       return true;
     }
     this.router.navigate(['/login']);
