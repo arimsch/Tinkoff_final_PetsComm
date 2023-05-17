@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-user-line',
@@ -8,7 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class UserLineComponent {
   @Input()
-  public userName!: string;
-  @Input()
-  public userPhotoURL!: string;
+  public user!: User|null;  
 }

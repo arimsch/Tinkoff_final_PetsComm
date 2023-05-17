@@ -13,7 +13,7 @@ import { Comment } from 'src/app/news/models/comment';
   templateUrl: './add-comment.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCommentComponent implements OnInit{
+export class AddCommentComponent implements OnInit {
   @Output()
   public addComment = new EventEmitter<Comment>();
 

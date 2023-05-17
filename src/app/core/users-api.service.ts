@@ -15,6 +15,10 @@ export class UsersApiService implements IUsersApiService {
     return this.httpClient.get<User[]>(`${host}.json`);
   }
 
+  public getUser(id:string): Observable<User> {
+    return this.httpClient.get<User>(`${host}/${id}.json`);
+  }
+
   public getAllSubscribes(curUserId: string): Observable<Object> {
     return this.httpClient.get<Object>(
       `${host}/${curUserId}/${pathSubsctribe}.json`

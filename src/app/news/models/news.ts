@@ -3,7 +3,9 @@ export interface News {
   content: string;
   timestamp: number;
   like?: object;
-  comments?: object;
+  comments?: {
+    [uid: string]: Comment;
+  };
   urlNewsPhoto?: string;
 }
 

@@ -41,8 +41,9 @@ import { INewsApiServiceToken } from './interfaces/news-api-service';
     SharedModule,
     TuiInputFilesModule,
   ],
-  providers:
-  [{ provide: INewsApiServiceToken, useClass: NewsApiService }, 
-    NewsService]
+  providers: [
+    { provide: INewsApiServiceToken, useClass: NewsApiService },
+    NewsService,
+  ],
 })
 export class NewsModule {}

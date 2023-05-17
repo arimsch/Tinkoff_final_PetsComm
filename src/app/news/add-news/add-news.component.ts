@@ -5,21 +5,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { TuiFileLike } from '@taiga-ui/kit';
-import {
-  Observable,
-  Subject,
-  finalize,
-  map,
-  of,
-  switchMap,
-  timer,
-} from 'rxjs';
+import { Observable, Subject, finalize, map, of, switchMap, timer } from 'rxjs';
 import { FireStorageService } from 'src/app/core/fire-storage.service';
 import { News } from 'src/app/news/models/news';
 import { NewsForm } from '../models/news-form';
@@ -30,11 +18,11 @@ import { NewsForm } from '../models/news-form';
   styleUrls: ['./add-news.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddNewsComponent implements OnInit{
+export class AddNewsComponent implements OnInit {
   @Output()
   public addNews = new EventEmitter<NewsForm>();
 
-  private _urlPhoto: string| null = null;
+  private _urlPhoto: string | null = null;
 
   public formNews!: FormGroup;
 
@@ -76,7 +64,7 @@ export class AddNewsComponent implements OnInit{
 
   public startLoading(file: TuiFileLike): Observable<TuiFileLike | null> {
     this.loadingFiles$.next(file);
-    this.fireStorageService.uploadNewsPhoto(Date.now().toString(),file);
+    this.fireStorageService.uploadNewsPhoto(Date.now().toString(), file);
     return timer(7000).pipe(
       map(() => {
         if (this.fireStorageService.url !== null) {
@@ -93,11 +81,11 @@ export class AddNewsComponent implements OnInit{
   }
 
   public sendNews(formNews: FormGroup<any>): void {
-    if(this._urlPhoto){
-      this.addNews.emit({...formNews.value,urlNewsPhoto: this._urlPhoto});
+    if (this._urlPhoto) {
+      this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
       this._urlPhoto = null;
     } else {
-      this.addNews.emit({...formNews.value});
+      this.addNews.emit({ ...formNews.value });
     }
     this.formNews.reset();
   }

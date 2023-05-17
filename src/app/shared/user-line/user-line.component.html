@@ -1,11 +1,11 @@
 <div class="line">
   <tui-avatar
     new
-    text="alex inkin"
+    text="{{ user?.displayName }}"
     size="xs"
-    avatarUrl="{{ userPhotoURL }}"
+    avatarUrl="{{ user?.photoURL }}"
     class="tui-space_vertical-1"></tui-avatar>
   <div class="line__content">
-    <h2>{{ userName }}</h2>
+    <h2>{{ user?.displayName }}</h2>
   </div>
 </div>

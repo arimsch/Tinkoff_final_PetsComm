@@ -1,5 +1,5 @@
 <article class="news">
-  <app-user-line [userName]="currentNews.author"></app-user-line>
+  <app-user-line [user]="(user$|async)"></app-user-line>
   <div class="news__content">
     {{ currentNews.content }}
   </div>

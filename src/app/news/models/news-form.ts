@@ -1,4 +1,4 @@
 export interface NewsForm {
-    content: string;
-    urlNewsPhoto?: string;
-  }
+  content: string;
+  urlNewsPhoto?: string;
+}

@@ -21,10 +21,15 @@ export class UserService {
     this._userId = this.authService.currentUser$.value?.uid || '';
   }
 
-  public get userId(): string{
+  public get userId(): string {
     return this._userId;
   }
 
+  public getUser(id: string): Observable<User> {
+    return this.usersApiService
+      .getUser(id)
+  }
+  
   public getAllUsers(): Observable<User[]> {
     return this.usersApiService
       .getAllUsers()
