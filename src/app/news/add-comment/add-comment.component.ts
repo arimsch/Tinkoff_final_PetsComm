@@ -2,17 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comment } from 'src/shared/models/comment';
+import { Comment } from 'src/app/news/models/comment';
 
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCommentComponent {
+export class AddCommentComponent implements OnInit{
   @Output()
   public addComment = new EventEmitter<Comment>();
 

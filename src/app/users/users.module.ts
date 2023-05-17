@@ -12,6 +12,5 @@ import { UserSubCardComponent } from './users-list/user-sub-card/user-sub-card.c
 @NgModule({
   declarations: [UsersComponent, UsersListComponent, UserSubCardComponent],
   imports: [CommonModule, UsersRoutingModule, TuiAvatarModule, SharedModule],
-  providers: [{ provide: IUsersApiServiceToken, useClass: UsersApiService }],
 })
 export class UsersModule {}

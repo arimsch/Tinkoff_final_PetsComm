@@ -1,1 +1,7 @@
+<app-button
+  [align]="'left'"
+  [text]="!toggleNews ? 'Добавить новость' : 'Скрыть'"
+  (click)="toggleAddNews()"
+  ></app-button>
+<app-add-news *ngIf="toggleNews" (addNews)="addNews($event)"></app-add-news>
 <app-news-card *ngFor="let n of news" [currentNews]="n"></app-news-card>

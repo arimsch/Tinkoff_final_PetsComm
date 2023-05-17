@@ -1,9 +1,9 @@
 export interface News {
-  $id: string;
   author: string;
   content: string;
-  like: object;
   timestamp: number;
+  like?: object;
+  comments?: object;
   urlNewsPhoto?: string;
 }
 

@@ -1,10 +1,9 @@
-import { Inject, Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../shared/models/user';
 import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/storage.service';
-import { DestroyService } from 'src/app/core/destroy.service';
 
 @Injectable()
 export class AuthService {
@@ -42,9 +41,9 @@ export class AuthService {
             };
             this.storageService.set('currentUser', currentUser);
             this._currentUser$.next(currentUser);
+            this.router.navigate(['/']);
           }
         });
-        this.router.navigate(['/']);
       })
       .catch(error => {
         switch (error.code) {

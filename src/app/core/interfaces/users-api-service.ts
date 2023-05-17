@@ -5,9 +5,14 @@ import { InjectionToken } from '@angular/core';
 export const IUsersApiServiceToken = new InjectionToken('IUsersApiService');
 
 export interface IUsersApiService {
-  getAll(): Observable<User[]>;
+  getAllUsers(): Observable<User[]>;
 
-  getSubscribe(path: string): Observable<Object>;
+  getAllSubscribes(curUserId: string): Observable<Object>;
 
-  // add(user: User): Observable<void>;
+  addUser(user: User): Observable<User>;
+
+  addSubsctribe(curUserId: string, id: string): Observable<Object>;
+
+  deleteSubsctribe(curUserId: string, id: string): Observable<void>;
+  
 }
