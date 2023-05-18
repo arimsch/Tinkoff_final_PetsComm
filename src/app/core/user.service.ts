@@ -6,7 +6,7 @@ import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import {
   IUsersApiService,
   IUsersApiServiceToken,
-} from './interfaces/users-api-service';
+} from './interfaces/i-users-api-service';
 
 @Injectable()
 export class UserService {
@@ -26,10 +26,9 @@ export class UserService {
   }
 
   public getUser(id: string): Observable<User> {
-    return this.usersApiService
-      .getUser(id)
+    return this.usersApiService.getUser(id);
   }
-  
+
   public getAllUsers(): Observable<User[]> {
     return this.usersApiService
       .getAllUsers()

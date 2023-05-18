@@ -1,11 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
-import { NewsApiService } from './news-api.service';
 import {
   INewsApiService,
   INewsApiServiceToken,
-} from './interfaces/news-api-service';
+} from './interfaces/i-news-api-service';
 import { News } from './models/news';
 import { Observable, map } from 'rxjs';
+import { UserComment } from './models/user-comment';
 
 @Injectable()
 export class NewsService {
@@ -19,10 +19,20 @@ export class NewsService {
   }
 
   public getAllNews(): Observable<News[]> {
+    return this.newsApiService.getAllNews().pipe(map(el => Object.values(el)));
+  }
+
+  public getAllCommentsNews(newsId: string): Observable<UserComment[]> {
     return this.newsApiService
-      .getAllNews()
-      .pipe(
-        map(el => Object.values(el))
-      );
+      .getComments(newsId)
+      .pipe(map(el => Object.values(el)));
+  }
+
+  public addLikeNews(newsId: string, userId: string): void {
+    this.newsApiService.addLike(newsId, userId).subscribe();
+  }
+
+  public addCommentNews(newsId: string, comment: UserComment): void {
+    this.newsApiService.addComment(newsId, comment).subscribe();
   }
 }

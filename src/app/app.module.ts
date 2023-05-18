@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsersModule } from './users/users.module';
 import { FireStorageService } from './core/fire-storage.service';
 import { UsersApiService } from './core/users-api.service';
-import { IUsersApiServiceToken } from './core/interfaces/users-api-service';
+import { IUsersApiServiceToken } from './core/interfaces/i-users-api-service';
 import { UserService } from './core/user.service';
 
 @NgModule({

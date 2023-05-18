@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
-import { IUsersApiService } from './interfaces/users-api-service';
+import { IUsersApiService } from './interfaces/i-users-api-service';
 
 const host = 'https://petscomm-bb44f-default-rtdb.firebaseio.com/users';
 const pathSubsctribe = '/subscribe';
@@ -15,7 +15,7 @@ export class UsersApiService implements IUsersApiService {
     return this.httpClient.get<User[]>(`${host}.json`);
   }
 
-  public getUser(id:string): Observable<User> {
+  public getUser(id: string): Observable<User> {
     return this.httpClient.get<User>(`${host}/${id}.json`);
   }
 
@@ -29,8 +29,8 @@ export class UsersApiService implements IUsersApiService {
     return this.httpClient.put<User>(`${host}/${user.uid}.json`, user);
   }
 
-  public addSubsctribe(curUserId: string, id: string): Observable<Object> {
-    return this.httpClient.put<User>(
+  public addSubsctribe(curUserId: string, id: string): Observable<void> {
+    return this.httpClient.put<void>(
       `${host}/${curUserId}/${pathSubsctribe}/${id}.json`,
       true
     );

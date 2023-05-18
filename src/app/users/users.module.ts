@@ -4,7 +4,7 @@ import { UsersComponent } from './users.component';
 import { TuiAvatarModule } from '@taiga-ui/kit';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersListComponent } from './users-list/users-list.component';
-import { IUsersApiServiceToken } from '../core/interfaces/users-api-service';
+import { IUsersApiServiceToken } from '../core/interfaces/i-users-api-service';
 import { UsersApiService } from '../core/users-api.service';
 import { SharedModule } from '../shared/shared.module';
 import { UserSubCardComponent } from './users-list/user-sub-card/user-sub-card.component';

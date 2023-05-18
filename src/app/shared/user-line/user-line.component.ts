@@ -9,5 +9,5 @@ import { User } from '../models/user';
 })
 export class UserLineComponent {
   @Input()
-  public user!: User|null;  
+  public user!: User | null;
 }

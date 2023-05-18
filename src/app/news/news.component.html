@@ -4,5 +4,8 @@
   (click)="toggleAddNews()"></app-button>
 <app-add-news *ngIf="toggleNews" (addNews)="addNews($event)"></app-add-news>
 <div *ngIf="news$ | async as news">
-<app-news-card *ngFor="let n of news" [currentNews]="n"></app-news-card>
+  <app-news-card
+    *ngFor="let n of (news|async)"
+    [currentNews]="n"
+    (addLike)="addLike($event)"></app-news-card>
 </div>

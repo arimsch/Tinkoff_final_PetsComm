@@ -8,12 +8,12 @@ export interface IUsersApiService {
   getAllUsers(): Observable<User[]>;
 
   getAllSubscribes(curUserId: string): Observable<Object>;
-  
-  getUser(id:string): Observable<User>
+
+  getUser(id: string): Observable<User>;
 
   addUser(user: User): Observable<User>;
 
-  addSubsctribe(curUserId: string, id: string): Observable<Object>;
+  addSubsctribe(curUserId: string, id: string): Observable<void>;
 
   deleteSubsctribe(curUserId: string, id: string): Observable<void>;
 }

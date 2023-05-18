@@ -1,3 +1,4 @@
-<app-add-comment></app-add-comment>
-<app-comment *ngFor="let comment of comments" [comment]="comment">
-</app-comment>
+<app-add-comment (addComment)="addComment($event)"></app-add-comment>
+<div *ngIf="comments$ | async as comments">
+  <app-comment *ngFor="let c of comments | async" [comment]="c"> </app-comment>
+</div>

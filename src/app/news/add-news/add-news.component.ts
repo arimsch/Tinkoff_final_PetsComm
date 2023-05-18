@@ -81,12 +81,14 @@ export class AddNewsComponent implements OnInit {
   }
 
   public sendNews(formNews: FormGroup<any>): void {
-    if (this._urlPhoto) {
-      this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
-      this._urlPhoto = null;
-    } else {
-      this.addNews.emit({ ...formNews.value });
+    if (this._urlPhoto || formNews.value.content) {
+      if (this._urlPhoto) {
+        this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
+        this._urlPhoto = null;
+      } else {
+        this.addNews.emit({ ...formNews.value });
+      }
+      this.formNews.reset();
     }
-    this.formNews.reset();
   }
 }
