@@ -41,4 +41,10 @@ export class UsersApiService implements IUsersApiService {
       `${host}/${curUserId}/${pathSubsctribe}/${id}.json`
     );
   }
+
+  public updateData(curUserId: string, newData: object): Observable<object>{
+    return this.httpClient.patch<object>(
+      `${host}/${curUserId}.json`, newData
+    );
+  }
 }

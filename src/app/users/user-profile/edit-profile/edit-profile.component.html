@@ -7,14 +7,53 @@
         </tui-input>
       </div>
       <div class="tui-form__row">
+      <tui-input-date
+      [max]="maxDate"
+      tuiUnfinishedValidator="Finish filling the field"
+      formControlName="dateBth"
+  >
+      Дата рождения
+  </tui-input-date>
+</div>
+      <div class="tui-form__row">
         <tui-text-area
         formControlName="aboutMe"
         class="tui-space_bottom-4 field-small">
         Обо мне
       </tui-text-area>
       </div>
+      <tui-input-files
+      *ngIf="!fileControl.value"
+      accept="image/*"
+      [formControl]="fileControl"
+      (reject)="onReject($event)"></tui-input-files>
+
+    <tui-files class="tui-space_top-1">
+      <tui-file
+        *ngIf="loadedFiles$ | async as file"
+        [file]="file"
+        [showDelete]="fileControl.enabled"
+        (removed)="removeFile()"></tui-file>
+
+      <tui-file
+        *ngIf="rejectedFiles$ | async as file"
+        state="error"
+        [file]="file"
+        [showDelete]="fileControl.enabled"
+        (removed)="clearRejected()"></tui-file>
+
+      <tui-file
+        *ngIf="loadingFiles$ | async as file"
+        state="loading"
+        [file]="file"
+        [showDelete]="fileControl.enabled"></tui-file>
+    </tui-files>
       <app-button
         [align]="'right'"
         [text]="'Обновить'"
-        [disable]="profileForm.invalid"></app-button>
+        [disable]="(loadingFiles$ | async) !== null"></app-button>
+        <app-button
+        [align]="'right'"
+        [text]="'Выйти без сохранения'"
+        (click)="cencelEdit()"></app-button>
     </form>

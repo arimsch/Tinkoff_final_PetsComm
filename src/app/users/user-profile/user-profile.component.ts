@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { UserService } from 'src/app/core/user.service';
 import { User } from 'src/app/shared/models/user';
 
@@ -10,17 +11,21 @@ import { User } from 'src/app/shared/models/user';
 })
 export class UserProfileComponent {
   public toggleEditProf = false;
-  public user!: User;
 
-  constructor(private readonly userService: UserService){
-    this.userService.currentUser$.subscribe((user)=>{
-    if(user){
-      this.user = user
-    }
-  });
+  constructor(private readonly userService: UserService){}
+
+  public get user$(): BehaviorSubject<User> {
+    return this.userService.currentUser$;
   }
 
   public startEditProfile():void{
     this.toggleEditProf = !this.toggleEditProf;
+  }
+
+  public updateUserData(userData: object|null): void {
+    if(userData){
+      this.userService.updateUserData(userData);
+    }
+    this.startEditProfile();
   }
 }

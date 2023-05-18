@@ -16,4 +16,6 @@ export interface IUsersApiService {
   addSubsctribe(curUserId: string, id: string): Observable<void>;
 
   deleteSubsctribe(curUserId: string, id: string): Observable<void>;
+
+  updateData(curUserId: string, newData: object): Observable<object>
 }

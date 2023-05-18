@@ -2,21 +2,21 @@
         <div class="profile__userPhoto">
           <tui-avatar
             new
-            text="{{ user.displayName }}"
+            text="{{ (user$|async)?.displayName}}"
             size="xxl"
-            avatarUrl="{{ user.photoURL }}"
+            avatarUrl="{{ (user$|async)?.photoURL }}"
             class="tui-space_vertical-1"></tui-avatar>
         </div>
         <div class="profile__userInfo">
             <ul>
-                <li><b>Имя пользователя:</b> {{user.displayName}}</li>
-                <li><b>Почта:</b> {{user.email}}</li>
-                <li><b>Дата рождения:</b> {{user.email}}</li>
-                <li><b>Обо мне:</b> {{user.about? user.about:"-"}}</li>
+                <li><b>Имя пользователя:</b> {{(user$|async)?.displayName}}</li>
+                <li><b>Почта:</b> {{(user$|async)?.email}}</li>
+                <li><b>Дата рождения:</b> {{((user$|async)?.dateBth|date)}}</li>
+                <li><b>Обо мне:</b> {{(user$|async)?.aboutMe? (user$|async)?.aboutMe:"-"}}</li>
             </ul>
             <app-button
             [align]="'left'"
             [text]="'Редактировать профиль'" (click)="startEditProfile()"></app-button>
         </div>
 </section>
-<app-edit-profile *ngIf="toggleEditProf" [userData]="user"></app-edit-profile>
+<app-edit-profile *ngIf="toggleEditProf" [userData]="(user$|async)" (submitProfile)="updateUserData($event)"></app-edit-profile>

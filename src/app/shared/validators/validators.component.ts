@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 import { TuiValidationError } from '@taiga-ui/cdk';
-import { patternValidators } from './registration-validators-params';
+import { patternValidators } from './validators-params';
 import { TextErrors } from './text-errors';
 
 @Component({

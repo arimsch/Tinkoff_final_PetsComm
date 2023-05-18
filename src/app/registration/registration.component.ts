@@ -12,7 +12,7 @@ import {
   HAVE_SLETTER_PATTERN,
   TYPE_MAIL,
   ValidatorsLength,
-} from '../shared/validators/registration-validators-params';
+} from '../shared/validators/validators-params';
 import { passwordsMatch } from './password-match';
 import { TuiAlertService } from '@taiga-ui/core';
 import { DestroyService } from '../core/destroy.service';

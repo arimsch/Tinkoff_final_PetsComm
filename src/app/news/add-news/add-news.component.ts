@@ -22,8 +22,6 @@ export class AddNewsComponent implements OnInit {
   @Output()
   public addNews = new EventEmitter<NewsForm>();
 
-  private _urlPhoto: string | null = null;
-
   public formNews!: FormGroup;
 
   public readonly control = new FormControl();
@@ -33,6 +31,7 @@ export class AddNewsComponent implements OnInit {
   public readonly loadedFiles$ = this.control.valueChanges.pipe(
     switchMap(file => (file ? this.startLoading(file) : of(null)))
   );
+  private _urlPhoto: string | null = null;
 
   constructor(
     private readonly fb: FormBuilder,
@@ -82,12 +81,8 @@ export class AddNewsComponent implements OnInit {
 
   public sendNews(formNews: FormGroup<any>): void {
     if (this._urlPhoto || formNews.value.content) {
-      if (this._urlPhoto) {
         this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
         this._urlPhoto = null;
-      } else {
-        this.addNews.emit({ ...formNews.value });
-      }
       this.formNews.reset();
     }
   }

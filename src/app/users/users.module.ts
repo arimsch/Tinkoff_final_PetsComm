@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
-import { TuiAvatarModule, TuiInputModule, TuiTextAreaModule } from '@taiga-ui/kit';
+import { TuiAvatarModule, TuiInputDateModule, TuiInputFilesModule, TuiInputModule, TuiTextAreaModule } from '@taiga-ui/kit';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersListComponent } from './users-list/users-list.component';
 import { SharedModule } from '../shared/shared.module';
@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     TuiInputModule,
-    TuiTextAreaModule],
+    TuiTextAreaModule,
+    TuiInputDateModule,
+    TuiInputFilesModule],
 })
 export class UsersModule {}

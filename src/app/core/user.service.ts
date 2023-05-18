@@ -9,9 +9,10 @@ import {
 
 @Injectable()
 export class UserService {
-  private _userId: string;
-  private readonly _currentUser$ = new BehaviorSubject<User | null>(null);
+  private readonly _currentUser$: BehaviorSubject<User>;
   public readonly userSubscribeList$ = new BehaviorSubject<Object>({});
+
+  private _userId: string;
 
   constructor(
     @Inject(IUsersApiServiceToken)
@@ -19,14 +20,15 @@ export class UserService {
     private readonly authService: AuthService
   ) {
     this._userId = this.authService.currentUser$.value?.uid || '';
-    this.getUser(this._userId).subscribe(user => (this._currentUser$.next(user)));
+    this._currentUser$ = new BehaviorSubject(this.authService.currentUser$.value!);
+    this.getCurrentUser();
   }
 
   public get userId(): string {
     return this._userId;
   }
 
-  public get currentUser$(): BehaviorSubject<User|null>{
+  public get currentUser$(){
     return this._currentUser$;
   }
 
@@ -70,5 +72,13 @@ export class UserService {
 
   public userSubscribeStatus(id: string): boolean {
     return this.userSubscribeList$.value.hasOwnProperty(id);
+  }
+
+  public updateUserData(newData: object): void {
+    this.usersApiService.updateData(this._userId, newData).subscribe(() => this.getCurrentUser());
+  }
+
+  private getCurrentUser(): void {
+    this.usersApiService.getUser(this._userId).subscribe(user => this._currentUser$.next(user));
   }
 }
