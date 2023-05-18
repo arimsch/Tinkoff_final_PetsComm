@@ -2,29 +2,43 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/shared/models/user';
-import { IUsersApiService } from './interfaces/users-api-service';
+import { IUsersApiService } from './interfaces/i-users-api-service';
 
 const host = 'https://petscomm-bb44f-default-rtdb.firebaseio.com/users';
+const pathSubsctribe = '/subscribe';
 
 @Injectable()
 export class UsersApiService implements IUsersApiService {
   constructor(private httpClient: HttpClient) {}
-  // public add(user: User): Observable<void> {
-  //   return this.httpClient.post<void>(
-  //     `${host}/${user.uid}.json`,
-  //     JSON.stringify(user)
-  //   );
-  // }
 
-  //   public delete(id: string): Observable<void> {
-  //     return this.httpClient.delete<void>(`${host}/${id}`);
-  //   }
-
-  public getAll(): Observable<User[]> {
+  public getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${host}.json`);
   }
 
-  public getSubscribe(path: string): Observable<Object> {
-    return this.httpClient.get<Object>(`${host}/${path}.json`);
+  public getUser(id: string): Observable<User> {
+    return this.httpClient.get<User>(`${host}/${id}.json`);
+  }
+
+  public getAllSubscribes(curUserId: string): Observable<Object> {
+    return this.httpClient.get<Object>(
+      `${host}/${curUserId}/${pathSubsctribe}.json`
+    );
+  }
+
+  public addUser(user: User): Observable<User> {
+    return this.httpClient.put<User>(`${host}/${user.uid}.json`, user);
+  }
+
+  public addSubsctribe(curUserId: string, id: string): Observable<void> {
+    return this.httpClient.put<void>(
+      `${host}/${curUserId}/${pathSubsctribe}/${id}.json`,
+      true
+    );
+  }
+
+  public deleteSubsctribe(curUserId: string, id: string): Observable<void> {
+    return this.httpClient.delete<void>(
+      `${host}/${curUserId}/${pathSubsctribe}/${id}.json`
+    );
   }
 }

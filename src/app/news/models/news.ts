@@ -1,9 +1,12 @@
 export interface News {
-  $id: string;
+  uid: string;
   author: string;
   content: string;
-  like: object;
   timestamp: number;
+  likes?: object;
+  comments?: {
+    [uid: string]: Comment;
+  };
   urlNewsPhoto?: string;
 }
 

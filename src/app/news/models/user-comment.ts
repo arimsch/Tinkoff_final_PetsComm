@@ -1,5 +1,4 @@
-export interface Comment {
-  $id: string;
+export interface UserComment {
   author: string;
   content: string;
   timestamp: number;

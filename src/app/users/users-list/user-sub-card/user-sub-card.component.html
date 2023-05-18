@@ -1,7 +1,5 @@
 <div class="sub-card">
-  <app-user-line
-    [userName]="user.displayName"
-    [userPhotoURL]="userPhoto"></app-user-line>
+  <app-user-line [user]="user"></app-user-line>
   <app-button
     *ngIf="!(subscribeStatus$ | async)"
     [align]="'left'"

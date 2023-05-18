@@ -2,19 +2,19 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Comment } from 'src/shared/models/comment';
 
 @Component({
   selector: 'app-add-comment',
   templateUrl: './add-comment.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCommentComponent {
+export class AddCommentComponent implements OnInit {
   @Output()
-  public addComment = new EventEmitter<Comment>();
+  public addComment = new EventEmitter<string>();
 
   public formComment!: FormGroup;
 
@@ -31,11 +31,9 @@ export class AddCommentComponent {
   }
 
   public sendComment(formComment: FormGroup<any>): void {
-    // this.addComment.emit({
-    //   author: 'I will get it from authorizedUser.service',
-    //   content: formComment.value,
-    //   timestamp: new Date().getMilliseconds(),
-    // }),
-    //   this.formComment.reset();
+    if (this.formComment.valid) {
+      this.addComment.emit(formComment.value.content);
+      this.formComment.reset();
+    }
   }
 }
