@@ -1,0 +1,20 @@
+<form class="profile-form"
+      [formGroup]="profileForm"
+      (submit)="submitUserData(profileForm)">
+      <div class="tui-form__row">
+        <tui-input tuiTextfieldSize="s" formControlName="displayName">
+          Имя пользователя
+        </tui-input>
+      </div>
+      <div class="tui-form__row">
+        <tui-text-area
+        formControlName="aboutMe"
+        class="tui-space_bottom-4 field-small">
+        Обо мне
+      </tui-text-area>
+      </div>
+      <app-button
+        [align]="'right'"
+        [text]="'Обновить'"
+        [disable]="profileForm.invalid"></app-button>
+    </form>

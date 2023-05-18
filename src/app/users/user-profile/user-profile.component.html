@@ -1,0 +1,22 @@
+<section class="profile" *ngIf="!toggleEditProf">
+        <div class="profile__userPhoto">
+          <tui-avatar
+            new
+            text="{{ user.displayName }}"
+            size="xxl"
+            avatarUrl="{{ user.photoURL }}"
+            class="tui-space_vertical-1"></tui-avatar>
+        </div>
+        <div class="profile__userInfo">
+            <ul>
+                <li><b>Имя пользователя:</b> {{user.displayName}}</li>
+                <li><b>Почта:</b> {{user.email}}</li>
+                <li><b>Дата рождения:</b> {{user.email}}</li>
+                <li><b>Обо мне:</b> {{user.about? user.about:"-"}}</li>
+            </ul>
+            <app-button
+            [align]="'left'"
+            [text]="'Редактировать профиль'" (click)="startEditProfile()"></app-button>
+        </div>
+</section>
+<app-edit-profile *ngIf="toggleEditProf" [userData]="user"></app-edit-profile>

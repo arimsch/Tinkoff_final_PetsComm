@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { User } from '../shared/models/user';
+import { UserService } from '../core/user.service';
 
 @Component({
   selector: 'app-users',
@@ -6,4 +9,10 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./users.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent {}
+export class UsersComponent {
+  // public user$: Observable<User> | undefined;
+
+  // constructor(private readonly userService: UserService){
+  //   this.user$ = this.userService._currentUser$;
+  // }
+}

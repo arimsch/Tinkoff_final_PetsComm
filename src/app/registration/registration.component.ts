@@ -55,11 +55,6 @@ export class RegistrationComponent {
     return this.registrationForm.get('password');
   }
 
-  public registration(formValue: FormGroup): void {
-    let { email, password, displayName } = formValue.value;
-    this.registrationService.registration(email, password, displayName);
-  }
-
   private createAlertError(err: string): void {
     this.alerts.open(err, { label: 'Ошибка' }).subscribe();
   }
@@ -97,5 +92,10 @@ export class RegistrationComponent {
       },
       { validators: passwordsMatch }
     );
+  }
+
+  public registration(formValue: FormGroup): void {
+    let { email, password, displayName } = formValue.value;
+    this.registrationService.registration(email, password, displayName);
   }
 }

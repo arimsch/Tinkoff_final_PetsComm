@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFireObject } from '@angular/fire/compat/database';
 import { User } from '../shared/models/user';
 import { AuthService } from '../auth/auth.service';
 import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
@@ -11,6 +10,7 @@ import {
 @Injectable()
 export class UserService {
   private _userId: string;
+  private readonly _currentUser$ = new BehaviorSubject<User | null>(null);
   public readonly userSubscribeList$ = new BehaviorSubject<Object>({});
 
   constructor(
@@ -19,10 +19,15 @@ export class UserService {
     private readonly authService: AuthService
   ) {
     this._userId = this.authService.currentUser$.value?.uid || '';
+    this.getUser(this._userId).subscribe(user => (this._currentUser$.next(user)));
   }
 
   public get userId(): string {
     return this._userId;
+  }
+
+  public get currentUser$(): BehaviorSubject<User|null>{
+    return this._currentUser$;
   }
 
   public getUser(id: string): Observable<User> {
@@ -65,26 +70,5 @@ export class UserService {
 
   public userSubscribeStatus(id: string): boolean {
     return this.userSubscribeList$.value.hasOwnProperty(id);
-  }
-
-  private _usersList: User[] = [];
-
-  readonly itemsDB$ = new Subject<User[]>();
-  users$: Observable<User[]> | undefined;
-
-  userRef!: AngularFireObject<any>;
-
-  public user$!: BehaviorSubject<User>;
-
-  public get _user$() {
-    return this.user$;
-  }
-
-  public get usersList() {
-    return this._usersList;
-  }
-
-  public getUserInfo(uid: string) {
-    console.log(this._userId);
   }
 }
