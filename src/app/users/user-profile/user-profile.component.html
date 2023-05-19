@@ -17,6 +17,9 @@
             <app-button
             [align]="'left'"
             [text]="'Редактировать профиль'" (click)="startEditProfile()"></app-button>
+            <app-button
+            [align]="'left'"
+            [text]="'Сменить пользователя'" (click)="exitProfile()"></app-button>
         </div>
 </section>
 <app-edit-profile *ngIf="toggleEditProf" [userData]="(user$|async)" (submitProfile)="updateUserData($event)"></app-edit-profile>

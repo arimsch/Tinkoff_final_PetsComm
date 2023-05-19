@@ -28,4 +28,8 @@ export class UserProfileComponent {
     }
     this.startEditProfile();
   }
+
+  public exitProfile(): void{
+    this.userService.exit();
+  }
 }

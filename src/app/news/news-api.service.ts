@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { News } from './models/news';
@@ -8,12 +8,6 @@ import { UserComment } from './models/user-comment';
 const host = 'https://petscomm-bb44f-default-rtdb.firebaseio.com/news';
 const pathLike = '/likes';
 const pathComment = '/comments';
-
-const params = new HttpParams({
-  fromString: 'orderBy="timestamp","desc"',
-});
-
-const headers = new HttpHeaders().set('params', 'orderBy="timestamp","desc"');
 
 @Injectable()
 export class NewsApiService implements INewsApiService {

@@ -6,20 +6,27 @@ import {
 import { News } from './models/news';
 import { Observable, map } from 'rxjs';
 import { UserComment } from './models/user-comment';
+import { UserService } from '../core/user.service';
 
 @Injectable()
 export class NewsService {
   constructor(
     @Inject(INewsApiServiceToken)
-    private readonly newsApiService: INewsApiService
+    private readonly newsApiService: INewsApiService,
+    private readonly userService: UserService
   ) {}
 
   public addNews(news: News): void {
-    this.newsApiService.addNews(news).subscribe();
+    this.newsApiService.addNews(news).subscribe(() => this.userService.addNews(news.uid));
   }
 
   public getAllNews(): Observable<News[]> {
     return this.newsApiService.getAllNews().pipe(map(el => Object.values(el)));
+  }
+
+  public getSubscribeNews(): Observable<News[]> {
+    return this.newsApiService.getAllNews().pipe(map(el => Object.values(el)
+    .filter(news => this.userService.userSubscribeStatus(news.author) === true)));
   }
 
   public getAllCommentsNews(newsId: string): Observable<UserComment[]> {
@@ -33,6 +40,6 @@ export class NewsService {
   }
 
   public addCommentNews(newsId: string, comment: UserComment): void {
-    this.newsApiService.addComment(newsId, comment).subscribe();
+    this.newsApiService.addComment(newsId, comment).subscribe(() => this.userService.addComment(newsId));
   }
 }

@@ -5,6 +5,8 @@ export interface User {
   aboutMe?: string;
   dateBth?: number;
   photoURL?: string;
+  news?: object;
+  comments?: object;
   subscribe?: object;
-  //subscribe: {[uid: string]: boolean;}
+  //subscribe: {[uid: string]: true;}
 }

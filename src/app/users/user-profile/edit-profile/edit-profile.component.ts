@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
@@ -103,6 +104,9 @@ export class EditProfileComponent implements OnInit{
   public submitUserData(formValue: FormGroup):void{
     if(formValue.value.dateBth) {
     formValue.value.dateBth = formValue.value.dateBth.valueOf();
+    }
+    if(!this._urlPhoto) {
+      this._urlPhoto = this.userData?.photoURL || null;
     }
     this.submitProfile.emit({...formValue.value, photoURL:this._urlPhoto});
   }

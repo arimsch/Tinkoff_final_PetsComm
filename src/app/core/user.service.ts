@@ -6,6 +6,7 @@ import {
   IUsersApiService,
   IUsersApiServiceToken,
 } from './interfaces/i-users-api-service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,7 @@ export class UserService {
     this._userId = this.authService.currentUser$.value?.uid || '';
     this._currentUser$ = new BehaviorSubject(this.authService.currentUser$.value!);
     this.getCurrentUser();
+    this.getSubscribeList();
   }
 
   public get userId(): string {
@@ -64,6 +66,18 @@ export class UserService {
       .subscribe(() => this.getSubscribeList());
   }
 
+  public addNews(newsId: string): void {
+    this.usersApiService
+      .addUserNews(this._userId, newsId)
+      .subscribe();
+  }
+
+  public addComment(newsId: string): void {
+    this.usersApiService
+      .addUserComment(this._userId, newsId)
+      .subscribe();
+  }
+
   public deleteSubscribe(id: string): void {
     this.usersApiService
       .deleteSubsctribe(this._userId, id)
@@ -76,6 +90,10 @@ export class UserService {
 
   public updateUserData(newData: object): void {
     this.usersApiService.updateData(this._userId, newData).subscribe(() => this.getCurrentUser());
+  }
+
+  public exit(): void {
+    this.authService.disAuth();
   }
 
   private getCurrentUser(): void {

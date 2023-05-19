@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { User } from '../shared/models/user';
-import { Router } from '@angular/router';
 import { StorageService } from 'src/app/core/storage.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
   constructor(
     private readonly angularfireAuth: AngularFireAuth,
     private readonly storageService: StorageService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this._currentUser$ = new BehaviorSubject(
       this.storageService.get('currentUser')
@@ -44,7 +44,7 @@ export class AuthService {
             this.router.navigate(['/']);
           }
         });
-      })
+      }) 
       .catch(error => {
         switch (error.code) {
           case 'auth/wrong-password': {
@@ -55,5 +55,12 @@ export class AuthService {
             this.authErrMessage$.next('Неверный email');
         }
       });
+  }
+
+  public disAuth(): void {
+    this.storageService.remove('currentUser');
+    this._currentUser$.next(null);
+    this.router.navigate(['/login']);
+
   }
 }
