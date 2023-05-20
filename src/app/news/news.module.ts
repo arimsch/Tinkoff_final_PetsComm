@@ -18,6 +18,7 @@ import { NewsService } from './news.service';
 import { NewsApiService } from './news-api.service';
 import { INewsApiServiceToken } from './interfaces/i-news-api-service';
 import { NewsSubscribeComponent } from './news-subscribe/news-subscribe.component';
+import { NewsRoutingModule } from './news-routing.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { NewsSubscribeComponent } from './news-subscribe/news-subscribe.componen
   exports: [NewsComponent],
   imports: [
     CommonModule,
+    NewsRoutingModule,
     TuiSvgModule,
     TuiAccordionModule,
     FormsModule,

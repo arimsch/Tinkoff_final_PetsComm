@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/core/auth.guard';
 
 const routes: Routes = [
@@ -27,7 +27,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
+  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
