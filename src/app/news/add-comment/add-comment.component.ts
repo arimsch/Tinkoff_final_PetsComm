@@ -20,12 +20,6 @@ export class AddCommentComponent implements OnInit {
 
   constructor(private readonly fb: FormBuilder) {}
 
-  private buildCommentForm(): void {
-    this.formComment = this.fb.group({
-      content: [null, [Validators.required]],
-    });
-  }
-
   ngOnInit(): void {
     this.buildCommentForm();
   }
@@ -35,5 +29,11 @@ export class AddCommentComponent implements OnInit {
       this.addComment.emit(formComment.value.content);
       this.formComment.reset();
     }
+  }
+
+  private buildCommentForm(): void {
+    this.formComment = this.fb.group({
+      content: [null, [Validators.required]],
+    });
   }
 }

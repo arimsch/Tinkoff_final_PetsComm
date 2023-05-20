@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
-import { TuiAvatarModule, TuiInputDateModule, TuiInputFilesModule, TuiInputModule, TuiTextAreaModule } from '@taiga-ui/kit';
+import {
+  TuiAvatarModule,
+  TuiInputDateModule,
+  TuiInputFilesModule,
+  TuiInputModule,
+  TuiTextAreaModule,
+} from '@taiga-ui/kit';
 import { UsersRoutingModule } from './users-routing.module';
 import { UsersListComponent } from './users-list/users-list.component';
 import { SharedModule } from '../shared/shared.module';
@@ -11,13 +17,24 @@ import { EditProfileComponent } from './user-profile/edit-profile/edit-profile.c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [UsersComponent, UsersListComponent, UserSubCardComponent, UserProfileComponent, EditProfileComponent],
-  imports: [CommonModule, UsersRoutingModule, TuiAvatarModule, SharedModule,
+  declarations: [
+    UsersComponent,
+    UsersListComponent,
+    UserSubCardComponent,
+    UserProfileComponent,
+    EditProfileComponent,
+  ],
+  imports: [
+    CommonModule,
+    UsersRoutingModule,
+    TuiAvatarModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     TuiInputModule,
     TuiTextAreaModule,
     TuiInputDateModule,
-    TuiInputFilesModule],
+    TuiInputFilesModule,
+  ],
 })
 export class UsersModule {}

@@ -6,7 +6,6 @@ import {
   IUsersApiService,
   IUsersApiServiceToken,
 } from './interfaces/i-users-api-service';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
@@ -21,7 +20,9 @@ export class UserService {
     private readonly authService: AuthService
   ) {
     this._userId = this.authService.currentUser$.value?.uid || '';
-    this._currentUser$ = new BehaviorSubject(this.authService.currentUser$.value!);
+    this._currentUser$ = new BehaviorSubject(
+      this.authService.currentUser$.value!
+    );
     this.getCurrentUser();
     this.getSubscribeList();
   }
@@ -30,7 +31,7 @@ export class UserService {
     return this._userId;
   }
 
-  public get currentUser$(){
+  public get currentUser$(): BehaviorSubject<User> {
     return this._currentUser$;
   }
 
@@ -67,15 +68,11 @@ export class UserService {
   }
 
   public addNews(newsId: string): void {
-    this.usersApiService
-      .addUserNews(this._userId, newsId)
-      .subscribe();
+    this.usersApiService.addUserNews(this._userId, newsId).subscribe();
   }
 
   public addComment(newsId: string): void {
-    this.usersApiService
-      .addUserComment(this._userId, newsId)
-      .subscribe();
+    this.usersApiService.addUserComment(this._userId, newsId).subscribe();
   }
 
   public deleteSubscribe(id: string): void {
@@ -89,7 +86,9 @@ export class UserService {
   }
 
   public updateUserData(newData: object): void {
-    this.usersApiService.updateData(this._userId, newData).subscribe(() => this.getCurrentUser());
+    this.usersApiService
+      .updateData(this._userId, newData)
+      .subscribe(() => this.getCurrentUser());
   }
 
   public exit(): void {
@@ -97,6 +96,8 @@ export class UserService {
   }
 
   private getCurrentUser(): void {
-    this.usersApiService.getUser(this._userId).subscribe(user => this._currentUser$.next(user));
+    this.usersApiService
+      .getUser(this._userId)
+      .subscribe(user => this._currentUser$.next(user));
   }
 }

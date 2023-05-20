@@ -42,12 +42,6 @@ export class AddNewsComponent implements OnInit {
     this.buildCommentForm();
   }
 
-  private buildCommentForm(): void {
-    this.formNews = this.fb.group({
-      content: [null],
-    });
-  }
-
   public onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
     this.rejectedFiles$.next(file as TuiFileLike);
   }
@@ -81,9 +75,15 @@ export class AddNewsComponent implements OnInit {
 
   public sendNews(formNews: FormGroup<any>): void {
     if (this._urlPhoto || formNews.value.content) {
-        this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
-        this._urlPhoto = null;
+      this.addNews.emit({ ...formNews.value, urlNewsPhoto: this._urlPhoto });
+      this._urlPhoto = null;
       this.formNews.reset();
     }
+  }
+
+  private buildCommentForm(): void {
+    this.formNews = this.fb.group({
+      content: [null],
+    });
   }
 }

@@ -23,19 +23,18 @@ export class NewsCardComponent implements OnInit {
   @Output()
   public addLike = new EventEmitter<string>();
 
-  private userId: string;
   public user$: Observable<User> | undefined;
   public like = false;
+
+  private userId: string;
 
   constructor(private readonly userService: UserService) {
     this.userId = this.userService.userId;
   }
 
   ngOnInit(): void {
-    if (this.currentNews.likes?.hasOwnProperty(this.userId)) {
-      this.like = true;
-    }
     this.user$ = this.userService.getUser(this.currentNews.author);
+    this.initLikeStatus();
   }
 
   public get likesCount(): number {
@@ -52,5 +51,11 @@ export class NewsCardComponent implements OnInit {
   public likeNews(): void {
     this.addLike.emit(this.currentNews.uid);
     this.like = !this.like;
+  }
+
+  private initLikeStatus(): void {
+    if (this.currentNews.likes?.hasOwnProperty(this.userId)) {
+      this.like = true;
+    }
   }
 }

@@ -7,9 +7,9 @@ const pathUser = 'userImg';
 
 @Injectable()
 export class FireStorageService {
-  private _url: string | null;
-
   public readonly load$ = new BehaviorSubject<boolean>(false);
+
+  private _url: string | null;
 
   constructor(private readonly fireStorage: AngularFireStorage) {
     this._url = null;

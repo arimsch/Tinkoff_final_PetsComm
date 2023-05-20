@@ -1,25 +1,33 @@
 <section class="profile" *ngIf="!toggleEditProf">
-        <div class="profile__userPhoto">
-          <tui-avatar
-            new
-            text="{{ (user$|async)?.displayName}}"
-            size="xxl"
-            avatarUrl="{{ (user$|async)?.photoURL }}"
-            class="tui-space_vertical-1"></tui-avatar>
-        </div>
-        <div class="profile__userInfo">
-            <ul>
-                <li><b>Имя пользователя:</b> {{(user$|async)?.displayName}}</li>
-                <li><b>Почта:</b> {{(user$|async)?.email}}</li>
-                <li><b>Дата рождения:</b> {{((user$|async)?.dateBth|date)}}</li>
-                <li><b>Обо мне:</b> {{(user$|async)?.aboutMe? (user$|async)?.aboutMe:"-"}}</li>
-            </ul>
-            <app-button
-            [align]="'left'"
-            [text]="'Редактировать профиль'" (click)="startEditProfile()"></app-button>
-            <app-button
-            [align]="'left'"
-            [text]="'Сменить пользователя'" (click)="exitProfile()"></app-button>
-        </div>
+  <div class="profile__userPhoto">
+    <tui-avatar
+      new
+      text="{{ (user$ | async)?.displayName }}"
+      size="xxl"
+      avatarUrl="{{ (user$ | async)?.photoURL }}"
+      class="tui-space_vertical-1"></tui-avatar>
+  </div>
+  <div class="profile__userInfo">
+    <ul>
+      <li><b>Имя пользователя:</b> {{ (user$ | async)?.displayName }}</li>
+      <li><b>Почта:</b> {{ (user$ | async)?.email }}</li>
+      <li><b>Дата рождения:</b> {{ (user$ | async)?.dateBth | date }}</li>
+      <li>
+        <b>Обо мне:</b>
+        {{ (user$ | async)?.aboutMe ? (user$ | async)?.aboutMe : '-' }}
+      </li>
+    </ul>
+    <app-button
+      [align]="'left'"
+      [text]="'Редактировать профиль'"
+      (click)="startEditProfile()"></app-button>
+    <app-button
+      [align]="'left'"
+      [text]="'Сменить пользователя'"
+      (click)="exitProfile()"></app-button>
+  </div>
 </section>
-<app-edit-profile *ngIf="toggleEditProf" [userData]="(user$|async)" (submitProfile)="updateUserData($event)"></app-edit-profile>
+<app-edit-profile
+  *ngIf="toggleEditProf"
+  [userData]="user$ | async"
+  (submitProfile)="updateUserData($event)"></app-edit-profile>

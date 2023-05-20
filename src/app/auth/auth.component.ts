@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -17,7 +22,7 @@ import { Observable, takeUntil } from 'rxjs';
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   public authForm!: FormGroup;
 
   constructor(
@@ -29,9 +34,7 @@ export class AuthComponent {
 
   ngOnInit(): void {
     this.buildAuthForm();
-    this.authService.authErrMessage$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(err => this.createAlertError(err));
+    this.initAlertError();
   }
 
   public get emailField(): AbstractControl | null {
@@ -49,6 +52,12 @@ export class AuthComponent {
 
   private createAlertError(err: string): void {
     this.alerts.open(err, { label: 'Ошибка' }).subscribe();
+  }
+
+  private initAlertError(): void {
+    this.authService.authErrMessage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(err => this.createAlertError(err));
   }
 
   private buildAuthForm(): void {

@@ -19,7 +19,9 @@ export class CommentListComponent implements OnInit {
   public newsId!: string;
   private userId: string;
 
-  public readonly comments$ = new BehaviorSubject<Observable<UserComment[]>>(of([]));
+  public readonly comments$ = new BehaviorSubject<Observable<UserComment[]>>(
+    of([])
+  );
 
   constructor(
     private readonly newsService: NewsService,
@@ -40,6 +42,6 @@ export class CommentListComponent implements OnInit {
     });
     setTimeout(() => {
       this.comments$.next(this.newsService.getAllCommentsNews(this.newsId));
-    }, 3000);
+    }, 2000);
   }
 }
