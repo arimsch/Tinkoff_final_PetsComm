@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, PreloadingStrategy, RouterModule, Routes } from '@angular/router';
 import { NewsComponent } from '../news/news.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { UsersComponent } from './users.component';
@@ -12,7 +12,8 @@ const routes: Routes = [
     component: UsersComponent,
     children: [
       { path: '', component: UserProfileComponent },
-      { path: 'news', component: NewsComponent },
+      { path: 'news',
+      loadChildren: () => import('./../news/news.module').then(m => m.NewsModule) },
       { path: 'users', component: UsersListComponent },
       { path: 'newsSub', component: NewsSubscribeComponent },
     ],
