@@ -1,4 +1,4 @@
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { News } from './models/news';
@@ -11,7 +11,7 @@ const pathComment = '/comments';
 
 @Injectable()
 export class NewsApiService implements INewsApiService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private readonly httpClient: HttpClient) {}
 
   public getAllNews(): Observable<News[]> {
     return this.httpClient.get<News[]>(`${host}.json`);

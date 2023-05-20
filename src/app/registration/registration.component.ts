@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -26,7 +31,7 @@ import { Observable } from 'rxjs';
   providers: [DestroyService],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
   public registrationForm!: FormGroup;
 
   constructor(
@@ -38,9 +43,7 @@ export class RegistrationComponent {
 
   ngOnInit(): void {
     this.buildRegistrationForm();
-    this.registrationService.registrationErrMessage$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(err => this.createAlertError(err));
+    this.initAlertError();
   }
 
   public get displayName(): AbstractControl | null {
@@ -55,8 +58,19 @@ export class RegistrationComponent {
     return this.registrationForm.get('password');
   }
 
+  public registration(formValue: FormGroup): void {
+    let { email, password, displayName } = formValue.value;
+    this.registrationService.registration(email, password, displayName);
+  }
+
   private createAlertError(err: string): void {
     this.alerts.open(err, { label: 'Ошибка' }).subscribe();
+  }
+
+  private initAlertError(): void {
+    this.registrationService.registrationErrMessage$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(err => this.createAlertError(err));
   }
 
   private buildRegistrationForm(): void {
@@ -92,10 +106,5 @@ export class RegistrationComponent {
       },
       { validators: passwordsMatch }
     );
-  }
-
-  public registration(formValue: FormGroup): void {
-    let { email, password, displayName } = formValue.value;
-    this.registrationService.registration(email, password, displayName);
   }
 }

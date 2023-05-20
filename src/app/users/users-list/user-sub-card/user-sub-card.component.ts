@@ -30,7 +30,7 @@ export class UserSubCardComponent {
 
   constructor(
     private readonly userService: UserService,
-    @Inject(DestroyService) private destroy$: Observable<void>
+    @Inject(DestroyService) private readonly destroy$: Observable<void>
   ) {}
 
   ngOnInit(): void {

@@ -12,10 +12,11 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewsComponent implements OnInit {
-  private userId: string;
   public toggleNews = false;
 
   public readonly news$ = new BehaviorSubject<Observable<News[]>>(of([]));
+
+  private userId: string;
 
   constructor(
     private readonly userService: UserService,
@@ -43,7 +44,7 @@ export class NewsComponent implements OnInit {
     this.toggleNews = false;
     setTimeout(() => {
       this.news$.next(this.newsService.getAllNews());
-    }, 3000);
+    }, 2000);
   }
 
   public addLike(id: string): void {

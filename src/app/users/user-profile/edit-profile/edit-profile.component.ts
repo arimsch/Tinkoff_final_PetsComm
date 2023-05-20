@@ -1,6 +1,17 @@
-import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { TuiDay } from '@taiga-ui/cdk';
 import { TuiFileLike } from '@taiga-ui/kit';
 import { Observable, Subject, finalize, map, of, switchMap, timer } from 'rxjs';
@@ -13,18 +24,15 @@ import { ValidatorsLength } from 'src/app/shared/validators/validators-params';
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.less'],
-  changeDetection: ChangeDetectionStrategy.OnPush  
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditProfileComponent implements OnInit{
+export class EditProfileComponent implements OnInit {
   @Input()
-  public userData!: User| null;
+  public userData!: User | null;
   @Output()
-  public submitProfile = new EventEmitter<object|null>();
+  public submitProfile = new EventEmitter<object | null>();
 
   public profileForm!: FormGroup;
-  public formNews!: FormGroup;
-  public maxDate = TuiDay.currentLocal();
-
   public readonly fileControl = new FormControl();
 
   public readonly rejectedFiles$ = new Subject<TuiFileLike | null>();
@@ -33,41 +41,20 @@ export class EditProfileComponent implements OnInit{
     switchMap(file => (file ? this.startLoading(file) : of(null)))
   );
 
+  public maxDate = TuiDay.currentLocal();
   private _urlPhoto: string | null = null;
-  private userId:string;
+  private userId: string;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly fireStorageService: FireStorageService,
-    private readonly userService:UserService
+    private readonly userService: UserService
   ) {
     this.userId = this.userService.userId;
   }
 
-
   ngOnInit(): void {
     this.buildProfileForm();
-  }
-
-  private buildProfileForm(): void {
-    this.profileForm = this.fb.group(
-      {
-        displayName: [
-          this.userData?.displayName,
-          [
-            Validators.required,
-            Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
-            Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME),
-          ],
-        ],
-        dateBth: [
-          null,
-        ],
-        aboutMe: [
-          this.userData?.aboutMe || null,
-        ],
-      }
-    );
   }
 
   public onReject(file: TuiFileLike | readonly TuiFileLike[]): void {
@@ -101,17 +88,32 @@ export class EditProfileComponent implements OnInit{
     );
   }
 
-  public submitUserData(formValue: FormGroup):void{
-    if(formValue.value.dateBth) {
-    formValue.value.dateBth = formValue.value.dateBth.valueOf();
+  public submitUserData(formValue: FormGroup): void {
+    if (formValue.value.dateBth) {
+      formValue.value.dateBth = formValue.value.dateBth.valueOf();
     }
-    if(!this._urlPhoto) {
+    if (!this._urlPhoto) {
       this._urlPhoto = this.userData?.photoURL || null;
     }
-    this.submitProfile.emit({...formValue.value, photoURL:this._urlPhoto});
+    this.submitProfile.emit({ ...formValue.value, photoURL: this._urlPhoto });
   }
 
-  public cencelEdit():void{
+  public cencelEdit(): void {
     this.submitProfile.emit(null);
+  }
+
+  private buildProfileForm(): void {
+    this.profileForm = this.fb.group({
+      displayName: [
+        this.userData?.displayName,
+        [
+          Validators.required,
+          Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
+          Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME),
+        ],
+      ],
+      dateBth: [null],
+      aboutMe: [this.userData?.aboutMe || null],
+    });
   }
 }

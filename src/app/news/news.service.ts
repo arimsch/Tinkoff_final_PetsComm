@@ -17,7 +17,9 @@ export class NewsService {
   ) {}
 
   public addNews(news: News): void {
-    this.newsApiService.addNews(news).subscribe(() => this.userService.addNews(news.uid));
+    this.newsApiService
+      .addNews(news)
+      .subscribe(() => this.userService.addNews(news.uid));
   }
 
   public getAllNews(): Observable<News[]> {
@@ -25,8 +27,15 @@ export class NewsService {
   }
 
   public getSubscribeNews(): Observable<News[]> {
-    return this.newsApiService.getAllNews().pipe(map(el => Object.values(el)
-    .filter(news => this.userService.userSubscribeStatus(news.author) === true)));
+    return this.newsApiService
+      .getAllNews()
+      .pipe(
+        map(el =>
+          Object.values(el).filter(
+            news => this.userService.userSubscribeStatus(news.author) === true
+          )
+        )
+      );
   }
 
   public getAllCommentsNews(newsId: string): Observable<UserComment[]> {
@@ -40,6 +49,8 @@ export class NewsService {
   }
 
   public addCommentNews(newsId: string, comment: UserComment): void {
-    this.newsApiService.addComment(newsId, comment).subscribe(() => this.userService.addComment(newsId));
+    this.newsApiService
+      .addComment(newsId, comment)
+      .subscribe(() => this.userService.addComment(newsId));
   }
 }

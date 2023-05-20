@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environments';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthModule } from './auth/auth.module';
 import { RegistrationModule } from './registration/registration.module';
 import { AuthGuard } from 'src/app/core/auth.guard';
@@ -29,7 +28,6 @@ import { UserService } from './core/user.service';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireDatabaseModule,
     AngularFireStorageModule,
     TuiRootModule,
     TuiAlertModule,

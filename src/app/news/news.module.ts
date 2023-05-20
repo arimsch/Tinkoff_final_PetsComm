@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   TuiAccordionModule,
-  TuiElasticContainerModule,
   TuiInputFilesModule,
   TuiTextAreaModule,
 } from '@taiga-ui/kit';
@@ -33,7 +32,6 @@ import { NewsSubscribeComponent } from './news-subscribe/news-subscribe.componen
   exports: [NewsComponent],
   imports: [
     CommonModule,
-    TuiElasticContainerModule,
     TuiSvgModule,
     TuiAccordionModule,
     FormsModule,
