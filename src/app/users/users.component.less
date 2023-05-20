@@ -1,5 +1,5 @@
 @height-header-line: 200px;
-@height-nav-elems: 50px;
+@height-nav-elems: 80px;
 
 .container {
   max-width: 1080px;
@@ -8,7 +8,7 @@
 
 .title {
   display: flex;
-  justify-content: space-between;
+  justify-content: left;
   height: @height-header-line;
   background-color: var(--color-blue);
   &__label {
@@ -51,5 +51,8 @@
   .title,
   .nav-container__inner {
     flex-direction: column;
+    & > li {
+      height: @height-nav-elems - 30px;
   }
+}
 }

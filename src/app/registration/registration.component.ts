@@ -12,7 +12,7 @@ import {
   HAVE_SLETTER_PATTERN,
   TYPE_MAIL,
   ValidatorsLength,
-} from '../shared/validators/registration-validators-params';
+} from '../shared/validators/validators-params';
 import { passwordsMatch } from './password-match';
 import { TuiAlertService } from '@taiga-ui/core';
 import { DestroyService } from '../core/destroy.service';
@@ -55,11 +55,6 @@ export class RegistrationComponent {
     return this.registrationForm.get('password');
   }
 
-  public registration(formValue: FormGroup): void {
-    let { email, password, displayName } = formValue.value;
-    this.registrationService.registration(email, password, displayName);
-  }
-
   private createAlertError(err: string): void {
     this.alerts.open(err, { label: 'Ошибка' }).subscribe();
   }
@@ -97,5 +92,10 @@ export class RegistrationComponent {
       },
       { validators: passwordsMatch }
     );
+  }
+
+  public registration(formValue: FormGroup): void {
+    let { email, password, displayName } = formValue.value;
+    this.registrationService.registration(email, password, displayName);
   }
 }

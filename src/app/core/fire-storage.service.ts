@@ -3,11 +3,13 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BehaviorSubject } from 'rxjs';
 
 const pathNews = 'newsImg';
+const pathUser = 'userImg';
 
 @Injectable()
 export class FireStorageService {
-  public readonly load$ = new BehaviorSubject<boolean>(false);
   private _url: string | null;
+
+  public readonly load$ = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly fireStorage: AngularFireStorage) {
     this._url = null;
@@ -23,6 +25,20 @@ export class FireStorageService {
     this.fireStorage.upload(`${pathNews}/${id}`, data).then(() => {
       this.fireStorage
         .ref(`${pathNews}/${id}`)
+        .getDownloadURL()
+        .subscribe(url => {
+          this._url = url;
+          this.load$.next(false);
+        });
+    });
+  }
+
+  public uploadUserPhoto<T>(id: string, data: T): void {
+    this.load$.next(true);
+    this._url = null;
+    this.fireStorage.upload(`${pathUser}/${id}`, data).then(() => {
+      this.fireStorage
+        .ref(`${pathUser}/${id}`)
         .getDownloadURL()
         .subscribe(url => {
           this._url = url;

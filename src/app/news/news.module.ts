@@ -18,6 +18,7 @@ import { AddNewsComponent } from './add-news/add-news.component';
 import { NewsService } from './news.service';
 import { NewsApiService } from './news-api.service';
 import { INewsApiServiceToken } from './interfaces/i-news-api-service';
+import { NewsSubscribeComponent } from './news-subscribe/news-subscribe.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { INewsApiServiceToken } from './interfaces/i-news-api-service';
     CommentComponent,
     CommentListComponent,
     AddNewsComponent,
+    NewsSubscribeComponent,
   ],
   exports: [NewsComponent],
   imports: [

@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFireObject } from '@angular/fire/compat/database';
 import { User } from '../shared/models/user';
 import { AuthService } from '../auth/auth.service';
 import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
@@ -7,11 +6,14 @@ import {
   IUsersApiService,
   IUsersApiServiceToken,
 } from './interfaces/i-users-api-service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class UserService {
-  private _userId: string;
+  private readonly _currentUser$: BehaviorSubject<User>;
   public readonly userSubscribeList$ = new BehaviorSubject<Object>({});
+
+  private _userId: string;
 
   constructor(
     @Inject(IUsersApiServiceToken)
@@ -19,10 +21,17 @@ export class UserService {
     private readonly authService: AuthService
   ) {
     this._userId = this.authService.currentUser$.value?.uid || '';
+    this._currentUser$ = new BehaviorSubject(this.authService.currentUser$.value!);
+    this.getCurrentUser();
+    this.getSubscribeList();
   }
 
   public get userId(): string {
     return this._userId;
+  }
+
+  public get currentUser$(){
+    return this._currentUser$;
   }
 
   public getUser(id: string): Observable<User> {
@@ -57,6 +66,18 @@ export class UserService {
       .subscribe(() => this.getSubscribeList());
   }
 
+  public addNews(newsId: string): void {
+    this.usersApiService
+      .addUserNews(this._userId, newsId)
+      .subscribe();
+  }
+
+  public addComment(newsId: string): void {
+    this.usersApiService
+      .addUserComment(this._userId, newsId)
+      .subscribe();
+  }
+
   public deleteSubscribe(id: string): void {
     this.usersApiService
       .deleteSubsctribe(this._userId, id)
@@ -67,24 +88,15 @@ export class UserService {
     return this.userSubscribeList$.value.hasOwnProperty(id);
   }
 
-  private _usersList: User[] = [];
-
-  readonly itemsDB$ = new Subject<User[]>();
-  users$: Observable<User[]> | undefined;
-
-  userRef!: AngularFireObject<any>;
-
-  public user$!: BehaviorSubject<User>;
-
-  public get _user$() {
-    return this.user$;
+  public updateUserData(newData: object): void {
+    this.usersApiService.updateData(this._userId, newData).subscribe(() => this.getCurrentUser());
   }
 
-  public get usersList() {
-    return this._usersList;
+  public exit(): void {
+    this.authService.disAuth();
   }
 
-  public getUserInfo(uid: string) {
-    console.log(this._userId);
+  private getCurrentUser(): void {
+    this.usersApiService.getUser(this._userId).subscribe(user => this._currentUser$.next(user));
   }
 }

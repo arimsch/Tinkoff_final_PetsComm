@@ -6,4 +6,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./users.component.less'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UsersComponent {}
+export class UsersComponent {
+}

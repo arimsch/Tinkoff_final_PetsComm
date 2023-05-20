@@ -13,7 +13,13 @@ export interface IUsersApiService {
 
   addUser(user: User): Observable<User>;
 
+  addUserNews(curUserId: string, id: string): Observable<void>;
+
+  addUserComment(curUserId: string, id: string): Observable<void>
+
   addSubsctribe(curUserId: string, id: string): Observable<void>;
 
   deleteSubsctribe(curUserId: string, id: string): Observable<void>;
+
+  updateData(curUserId: string, newData: object): Observable<object>
 }

@@ -3,8 +3,7 @@ import { News } from 'src/app/news/models/news';
 import { UserService } from '../core/user.service';
 import { NewsService } from './news.service';
 import { NewsForm } from './models/news-form';
-import { BehaviorSubject, Observable, of, timestamp } from 'rxjs';
-import { UserComment } from './models/user-comment';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-news',
