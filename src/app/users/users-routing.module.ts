@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: UsersComponent,
     children: [
-      { path: '', component: UserProfileComponent },
+      { path: 'profile', component: UserProfileComponent },
       { path: 'news',
       loadChildren: () => import('./../news/news.module').then(m => m.NewsModule) },
       { path: 'users', component: UsersListComponent },

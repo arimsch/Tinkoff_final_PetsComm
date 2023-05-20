@@ -41,7 +41,7 @@ export class AuthService {
             };
             this.storageService.set('currentUser', currentUser);
             this._currentUser$.next(currentUser);
-            this.router.navigate(['/']);
+            this.router.navigateByUrl('/profile');
           }
         });
       })
@@ -60,6 +60,6 @@ export class AuthService {
   public disAuth(): void {
     this.storageService.remove('currentUser');
     this._currentUser$.next(null);
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login');
   }
 }
