@@ -14,6 +14,7 @@ import { TuiAlertService } from '@taiga-ui/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { DestroyService } from '../core/destroy.service';
 import { Observable, takeUntil } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -28,6 +29,7 @@ export class AuthComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
+    private readonly router: Router,
     @Inject(DestroyService) private readonly destroy$: Observable<void>,
     @Inject(TuiAlertService) private readonly alerts: TuiAlertService
   ) {}

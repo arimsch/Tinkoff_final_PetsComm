@@ -57,9 +57,11 @@ export class AuthService {
       });
   }
 
-  public disAuth(): void {
-    this.storageService.remove('currentUser');
-    this._currentUser$.next(null);
-    this.router.navigateByUrl('/login');
+  public async disAuth(): Promise<void> {
+    return this.angularfireAuth.signOut().then(() => {
+      this.storageService.remove('currentUser');
+      this._currentUser$.next(null);
+      this.router.navigate(['/login']);
+    });
   }
 }
