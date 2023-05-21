@@ -80,42 +80,40 @@ export class RegistrationComponent implements OnInit {
           null,
           {
             validators: [
-            Validators.required,
-            Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
-            Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME),
-          ],
-          updateOn: 'blur'
-        }
+              Validators.required,
+              Validators.minLength(ValidatorsLength.MIN_LENGTH_DISPLAY_NAME),
+              Validators.maxLength(ValidatorsLength.MAX_LENGTH_DISPLAY_NAME),
+            ],
+            updateOn: 'blur',
+          },
         ],
         email: [
           null,
           {
-            validators: 
-          [
-            Validators.required,
-            Validators.maxLength(ValidatorsLength.MAX_LENGTH_MAIL),
-            Validators.pattern(TYPE_MAIL),
-          ],
-          updateOn: 'blur'
-        }
+            validators: [
+              Validators.required,
+              Validators.maxLength(ValidatorsLength.MAX_LENGTH_MAIL),
+              Validators.pattern(TYPE_MAIL),
+            ],
+            updateOn: 'blur',
+          },
         ],
         password: [
           '',
           {
-            validators: 
-          [
-            Validators.required,
-            Validators.pattern(HAVE_NUMBER_PATTERN),
-            Validators.pattern(HAVE_BIGLETTER_PATTERN),
-            Validators.pattern(HAVE_SLETTER_PATTERN),
-            Validators.minLength(ValidatorsLength.MIN_LENGTH_PASSW),
-          ],
-          updateOn: 'blur'
-        }
+            validators: [
+              Validators.required,
+              Validators.pattern(HAVE_NUMBER_PATTERN),
+              Validators.pattern(HAVE_BIGLETTER_PATTERN),
+              Validators.pattern(HAVE_SLETTER_PATTERN),
+              Validators.minLength(ValidatorsLength.MIN_LENGTH_PASSW),
+            ],
+            updateOn: 'blur',
+          },
         ],
-        confirmPassword: ['', ]
+        confirmPassword: [''],
       },
-      { validators: passwordsMatch}
+      { validators: passwordsMatch }
     );
   }
 }

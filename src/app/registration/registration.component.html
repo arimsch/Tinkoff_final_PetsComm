@@ -1,47 +1,47 @@
 <div class="form-container">
-<article class="form-auth">
-  <div class="form-auth__title">
-    <h1>PetsComm</h1>
-  </div>
-  <div class="form-auth__body">
-    <form
-      [formGroup]="registrationForm"
-      (submit)="registration(registrationForm)">
-      <div class="tui-form__row">
-        <tui-input tuiTextfieldSize="s" formControlName="displayName">
-          Имя пользователя
-        </tui-input>
-        <app-validators [field]="displayName"></app-validators>
-      </div>
-      <div class="tui-form__row">
-        <tui-input tuiTextfieldSize="s" formControlName="email">
-          Электронная почта
-        </tui-input>
-        <app-validators [field]="emailField"></app-validators>
-      </div>
+  <article class="form-auth">
+    <div class="form-auth__title">
+      <h1>PetsComm</h1>
+    </div>
+    <div class="form-auth__body">
+      <form
+        [formGroup]="registrationForm"
+        (submit)="registration(registrationForm)">
+        <div class="tui-form__row">
+          <tui-input tuiTextfieldSize="s" formControlName="displayName">
+            Имя пользователя
+          </tui-input>
+          <app-validators [field]="displayName"></app-validators>
+        </div>
+        <div class="tui-form__row">
+          <tui-input tuiTextfieldSize="s" formControlName="email">
+            Электронная почта
+          </tui-input>
+          <app-validators [field]="emailField"></app-validators>
+        </div>
 
-      <div class="tui-form__row">
-        <tui-input-password tuiTextfieldSize="s" formControlName="password">
-          Пароль
-        </tui-input-password>
-        <app-validators [field]="passwordField"></app-validators>
-      </div>
-      <div class="tui-form__row">
-        <tui-input-password
-          tuiTextfieldSize="s"
-          formControlName="confirmPassword">
-          Подтвердите пароль
-        </tui-input-password>
-        <app-validators [field]="registrationForm"></app-validators>
-      </div>
-      <app-button
-        [align]="'right'"
-        [text]="'Регистрация'"
-        [disable]="registrationForm.invalid"></app-button>
-      <div class="right-align">
-        <a class="router-link" routerLink="/login">Войти</a>
-      </div>
-    </form>
-  </div>
-</article>
+        <div class="tui-form__row">
+          <tui-input-password tuiTextfieldSize="s" formControlName="password">
+            Пароль
+          </tui-input-password>
+          <app-validators [field]="passwordField"></app-validators>
+        </div>
+        <div class="tui-form__row">
+          <tui-input-password
+            tuiTextfieldSize="s"
+            formControlName="confirmPassword">
+            Подтвердите пароль
+          </tui-input-password>
+          <app-validators [field]="registrationForm"></app-validators>
+        </div>
+        <app-button
+          [align]="'right'"
+          [text]="'Регистрация'"
+          [disable]="registrationForm.invalid"></app-button>
+        <div class="right-align">
+          <a class="router-link" routerLink="/login">Войти</a>
+        </div>
+      </form>
+    </div>
+  </article>
 </div>

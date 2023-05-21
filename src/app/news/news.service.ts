@@ -23,7 +23,15 @@ export class NewsService {
   }
 
   public getAllNews(): Observable<News[]> {
-    return this.newsApiService.getAllNews().pipe(map(el => Object.values(el)));
+    return this.newsApiService
+      .getAllNews()
+      .pipe(
+        map(el =>
+          Object.values(el).sort(
+            (news1, news2) => news1.timestamp - news2.timestamp
+          )
+        )
+      );
   }
 
   public getSubscribeNews(): Observable<News[]> {

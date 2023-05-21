@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { User } from '../shared/models/user';
 import { StorageService } from 'src/app/core/storage.service';
 import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
+  public readonly destroy$ = new Subject();
   private readonly _currentUser$: BehaviorSubject<User | null>;
   private readonly _authErrMessage$ = new Subject<string>();
 
@@ -31,19 +32,17 @@ export class AuthService {
   public async auth(email: string, password: string): Promise<void> {
     return this.angularfireAuth
       .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.angularfireAuth.authState.subscribe(user => {
-          if (user) {
-            const currentUser: User = {
-              uid: user.uid,
-              email: email,
-              displayName: '',
-            };
-            this.storageService.set('currentUser', currentUser);
-            this._currentUser$.next(currentUser);
-            this.router.navigateByUrl('/profile');
-          }
-        });
+      .then(result => {
+        if (result.user?.uid) {
+          const currentUser: User = {
+            uid: result.user.uid,
+            email: email,
+            displayName: '',
+          };
+          this.storageService.set('currentUser', currentUser);
+          this._currentUser$.next(currentUser);
+          this.router.navigateByUrl('/profile');
+        }
       })
       .catch(error => {
         switch (error.code) {
@@ -60,7 +59,6 @@ export class AuthService {
   public async disAuth(): Promise<void> {
     return this.angularfireAuth.signOut().then(() => {
       this.storageService.remove('currentUser');
-      this._currentUser$.next(null);
       this.router.navigate(['/login']);
     });
   }
