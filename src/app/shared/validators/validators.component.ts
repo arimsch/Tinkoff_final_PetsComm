@@ -22,7 +22,6 @@ export class ValidatorsComponent {
     errorObj: ValidationErrors
   ): TuiValidationError | null {
     let errorType = Object.keys(errorObj)[0];
-    console.log(errorType);
     switch (errorType) {
       case 'pattern': {
         return new TuiValidationError(

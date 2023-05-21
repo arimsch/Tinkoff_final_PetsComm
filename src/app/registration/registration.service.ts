@@ -30,7 +30,7 @@ export class RegistrationService {
             email: email,
             displayName: displayName,
           });
-          this.router.navigate(['login']);
+          this.router.navigate(['/login']);
         }
       })
       .catch(error => {

@@ -41,7 +41,7 @@ export class AuthService {
             };
             this.storageService.set('currentUser', currentUser);
             this._currentUser$.next(currentUser);
-            this.router.navigate(['/']);
+            this.router.navigateByUrl('/profile');
           }
         });
       })
@@ -57,9 +57,11 @@ export class AuthService {
       });
   }
 
-  public disAuth(): void {
-    this.storageService.remove('currentUser');
-    this._currentUser$.next(null);
-    this.router.navigate(['/login']);
+  public async disAuth(): Promise<void> {
+    return this.angularfireAuth.signOut().then(() => {
+      this.storageService.remove('currentUser');
+      this._currentUser$.next(null);
+      this.router.navigate(['/login']);
+    });
   }
 }
