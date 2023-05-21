@@ -1,31 +1,31 @@
 <div class="form-container">
-<article class="form-auth">
-  <div class="form-auth__title">
-    <h1>PetsComm</h1>
-  </div>
-  <div class="form-auth__body">
-    <form [formGroup]="authForm" (submit)="auth(authForm)">
-      <div class="tui-form__row">
-        <tui-input tuiTextfieldSize="s" formControlName="email">
-          Электронная почта
-        </tui-input>
-        <app-validators [field]="emailField"></app-validators>
-      </div>
+  <article class="form-auth">
+    <div class="form-auth__title">
+      <h1>PetsComm</h1>
+    </div>
+    <div class="form-auth__body">
+      <form [formGroup]="authForm" (submit)="auth(authForm)">
+        <div class="tui-form__row">
+          <tui-input tuiTextfieldSize="s" formControlName="email">
+            Электронная почта
+          </tui-input>
+          <app-validators [field]="emailField"></app-validators>
+        </div>
 
-      <div class="tui-form__row">
-        <tui-input-password tuiTextfieldSize="s" formControlName="password">
-          Пароль
-        </tui-input-password>
-        <app-validators [field]="passwordField"></app-validators>
-      </div>
-      <app-button
-        [align]="'right'"
-        [text]="'Войти'"
-        [disable]="authForm.invalid"></app-button>
-      <div class="right-align">
-        <a class="router-link" routerLink="/registration">Создать аккаунт</a>
-      </div>
-    </form>
-  </div>
-</article>
+        <div class="tui-form__row">
+          <tui-input-password tuiTextfieldSize="s" formControlName="password">
+            Пароль
+          </tui-input-password>
+          <app-validators [field]="passwordField"></app-validators>
+        </div>
+        <app-button
+          [align]="'right'"
+          [text]="'Войти'"
+          [disable]="authForm.invalid"></app-button>
+        <div class="right-align">
+          <a class="router-link" routerLink="/registration">Создать аккаунт</a>
+        </div>
+      </form>
+    </div>
+  </article>
 </div>

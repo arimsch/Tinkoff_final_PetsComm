@@ -9,6 +9,10 @@ const host = 'https://petscomm-bb44f-default-rtdb.firebaseio.com/news';
 const pathLike = '/likes';
 const pathComment = '/comments';
 
+import { HttpParams } from '@angular/common/http';
+
+const params = new HttpParams().set('orderBy', '$timestamp');
+
 @Injectable()
 export class NewsApiService implements INewsApiService {
   constructor(private readonly httpClient: HttpClient) {}

@@ -5,6 +5,7 @@ import { AuthGuard } from 'src/app/core/auth.guard';
 const routes: Routes = [
   {
     path: 'registration',
+    title: 'registration',
     loadChildren: () =>
       import('./registration/registration.module').then(
         m => m.RegistrationModule
@@ -12,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    title: 'login',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {
@@ -27,7 +29,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})],
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

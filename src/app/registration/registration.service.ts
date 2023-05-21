@@ -25,13 +25,15 @@ export class RegistrationService {
       .createUserWithEmailAndPassword(email, password)
       .then(userCredential => {
         if (userCredential.user) {
-          this.userService.addUserWithUid({
+          return this.userService.addUserWithUid({
             uid: userCredential.user.uid,
             email: email,
             displayName: displayName,
           });
-          this.router.navigate(['/login']);
         }
+      })
+      .then(() => {
+        this.router.navigate(['login']);
       })
       .catch(error => {
         switch (error.code) {
