@@ -2,7 +2,7 @@
 
 ## Курсовой проект на курсе Tinkoff Fintech School, Frontend, весна 2023
 Выполнила Матушкина Арина 
-(https://coursework-arimsch-5tg3.vercel.app/)
+(https://coursework-arimsch-5tg3-git-master-arinam.vercel.app)
 
 ## Описание проекта
 PetsComm - приложение для любителей животных, которые хотят делиться моментами из жизни своих любимцев.
