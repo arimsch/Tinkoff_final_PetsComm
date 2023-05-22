@@ -11,8 +11,6 @@ export interface IUsersApiService {
 
   getUser(id: string): Observable<User>;
 
-  addUser(user: User): Observable<User>;
-
   addUserNews(curUserId: string, id: string): Observable<void>;
 
   addUserComment(curUserId: string, id: string): Observable<void>;
