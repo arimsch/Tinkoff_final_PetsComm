@@ -31,12 +31,6 @@ export class UsersApiService implements IUsersApiService {
       .pipe(catchError(this.handleError<Object>('getAllSubscribes', {})));
   }
 
-  public addUser(user: User): Observable<User> {
-    return this.httpClient
-      .put<User>(`${host}/${user.uid}.json`, user)
-      .pipe(catchError(this.handleError<User>('addUser')));
-  }
-
   public addSubsctribe(curUserId: string, id: string): Observable<void> {
     return this.httpClient
       .put<void>(`${host}/${curUserId}/${pathSubsctribe}/${id}.json`, true)

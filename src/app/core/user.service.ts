@@ -17,7 +17,7 @@ export class UserService {
   constructor(
     @Inject(IUsersApiServiceToken)
     private readonly usersApiService: IUsersApiService,
-    private readonly authService: AuthService,
+    private readonly authService: AuthService
   ) {
     this._userId = this.authService.currentUser$.value?.uid || '';
     this._currentUser$ = new BehaviorSubject(
@@ -25,16 +25,6 @@ export class UserService {
     );
     this.getCurrentUser();
     this.getSubscribeList();
-  }
-
-  ngOnInit(){
-    this.authService.currentUser$.subscribe(user => {
-      if(user){
-        this._currentUser$.next(user);
-        this._userId = user.uid;
-        this.getCurrentUser();
-      }
-    })
   }
 
   public get userId(): string {
@@ -67,10 +57,6 @@ export class UserService {
     });
   }
 
-  public addUserWithUid(user: User): void {
-    this.usersApiService.addUser(user).subscribe();
-  }
-
   public addSubscribe(id: string): void {
     this.usersApiService
       .addSubsctribe(this._userId, id)
@@ -100,7 +86,7 @@ export class UserService {
       .updateData(this._userId, newData)
       .subscribe(() => this.getCurrentUser());
   }
-  
+
   public exit(): void {
     this.authService.disAuth();
   }
