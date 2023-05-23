@@ -9,6 +9,3 @@ export interface News {
   };
   urlNewsPhoto?: string;
 }
-
-// firebase.firestore.Timestamp.fromDate(date)
-// firebaseDate.toDate()
