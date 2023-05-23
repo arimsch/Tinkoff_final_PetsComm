@@ -47,9 +47,15 @@ export class NewsService {
   }
 
   public getAllCommentsNews(newsId: string): Observable<UserComment[]> {
-    return this.newsApiService
-      .getComments(newsId)
-      .pipe(map(el => Object.values(el)));
+    return this.newsApiService.getComments(newsId).pipe(
+      map(el => {
+        if (el) {
+          return Object.values(el);
+        } else {
+          return el;
+        }
+      })
+    );
   }
 
   public addLikeNews(newsId: string, userId: string): void {
