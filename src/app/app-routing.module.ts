@@ -5,7 +5,7 @@ import { AuthGuard } from 'src/app/core/auth.guard';
 const routes: Routes = [
   {
     path: 'registration',
-    title: 'registration',
+    title: 'Регистрация',
     loadChildren: () =>
       import('./registration/registration.module').then(
         m => m.RegistrationModule
@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    title: 'login',
+    title: 'Вход',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
   },
   {

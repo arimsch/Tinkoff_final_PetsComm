@@ -10,14 +10,14 @@ const routes: Routes = [
     path: '',
     component: UsersComponent,
     children: [
-      { path: 'profile', title: 'profile', component: UserProfileComponent },
+      { path: 'profile', title: 'Профиль', component: UserProfileComponent },
       {
         path: 'news',
         loadChildren: () =>
           import('./../news/news.module').then(m => m.NewsModule),
       },
-      { path: 'users', title: 'users-list', component: UsersListComponent },
-      { path: 'newsSub', title: 'my-news', component: NewsSubscribeComponent },
+      { path: 'users', title: 'Пользователи', component: UsersListComponent },
+      { path: 'newsSub', title: 'Мои новости', component: NewsSubscribeComponent },
     ],
   },
 ];
